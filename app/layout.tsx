@@ -2,8 +2,11 @@ import type React from "react"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Inter } from "next/font/google"
+// Analytics, SpeedInsights, Script, and Suspense imports are removed
 
 const inter = Inter({ subsets: ["latin"] })
+
+// GA_TRACKING_ID is removed as Google Analytics is fully removed
 
 export const metadata = {
   title: "Career Opportunity: Police Officer - Hellertown Borough Police Department",
@@ -17,10 +20,10 @@ export const metadata = {
     siteName: "Hellertown Borough Police Department Careers",
     images: [
       {
-        url: "/og-image-hiring.png", // Updated image path
-        width: 1000, // Approximate width of the provided image
-        height: 1500, // Approximate height of the provided image
-        alt: "Hellertown Police Now Hiring - The Pride of Pennsylvania", // Updated alt text
+        url: "/og-image-hiring.png",
+        width: 1000,
+        height: 1500,
+        alt: "Hellertown Police Now Hiring - The Pride of Pennsylvania",
       },
     ],
     locale: "en_US",
@@ -30,7 +33,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Career Opportunity: Police Officer - Hellertown Borough Police Department",
     description: "Join the Hellertown PD! Now hiring Entry-Level Police Officers. Make a difference in your community.",
-    images: ["/og-image-hiring.png"], // Updated image path
+    images: ["/og-image-hiring.png"],
   },
     generator: 'v0.dev'
 }
@@ -48,10 +51,14 @@ export default function RootLayout({
         <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
+
+        {/* All Analytics Scripts are removed */}
       </head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          {/* Suspense wrapper removed */}
           {children}
+          {/* Analytics and SpeedInsights components removed */}
         </ThemeProvider>
       </body>
     </html>

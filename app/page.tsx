@@ -314,6 +314,16 @@ export default function JobDescription() {
                 <ul className="list-disc pl-5 space-y-2">
                   <li>
                     <Link
+                      href="https://www.pa.gov/content/dam/copapwp-pagov/en/mpoetc/documents/certification/certification-documents/certification_examination_study_guide.pdf"
+                      className="text-blue-400 hover:underline font-medium"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      MPOETC Certification Examination Study Guide
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       href="https://www.pa.gov/content/dam/copapwp-pagov/en/mpoetc/documents/training/basic-police-officer-training/basic%20police%20training%20syllabus.pdf"
                       className="text-blue-400 hover:underline font-medium"
                       target="_blank"
@@ -330,6 +340,16 @@ export default function JobDescription() {
                       rel="noopener noreferrer"
                     >
                       MPOETC Curriculum Overview 2024
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.pa.gov/agencies/mpoetc.html"
+                      className="text-blue-400 hover:underline font-medium"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Municipal Police Officers' Education and Training Commission Home
                     </Link>
                   </li>
                 </ul>
