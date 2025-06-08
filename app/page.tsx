@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Shield, Mail, MapPin, Users, Award, CheckCircle, Calendar, FileText, Download } from "lucide-react"
+import { Shield, Mail, MapPin, Users, Award, CheckCircle, Calendar, FileText, Download, BookOpen } from "lucide-react"
 import Link from "next/link"
 import { ThemeToggle } from "@/components/theme-toggle"
 
@@ -299,6 +299,44 @@ export default function JobDescription() {
                     Medical Exam including Drug Screening
                   </li>
                 </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card border-border shadow-sm hover:shadow-md transition-shadow duration-300">
+              <CardHeader>
+                <CardTitle className="text-foreground flex items-center gap-2 text-xl sm:text-2xl">
+                  <BookOpen className="h-5 w-5 sm:h-6 sm:w-6 text-teal-400" />
+                  MPOETC Study Guide Tips
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 text-muted-foreground text-sm sm:text-base">
+                <p>Familiarize yourself with the official MPOETC training materials to prepare for the examination:</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>
+                    <Link
+                      href="https://www.pa.gov/content/dam/copapwp-pagov/en/mpoetc/documents/training/basic-police-officer-training/basic%20police%20training%20syllabus.pdf"
+                      className="text-blue-400 hover:underline font-medium"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      MPOETC Basic Police Training Syllabus
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.pa.gov/content/dam/copapwp-pagov/en/mpoetc/documents/training/basic-police-officer-training/curriculum_overview_2024.pdf"
+                      className="text-blue-400 hover:underline font-medium"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      MPOETC Curriculum Overview 2024
+                    </Link>
+                  </li>
+                </ul>
+                <p className="text-xs text-muted-foreground/80 pt-2">
+                  These documents provide insight into the topics covered in the basic training program and can be
+                  valuable resources for your preparation.
+                </p>
               </CardContent>
             </Card>
           </div>
