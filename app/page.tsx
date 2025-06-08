@@ -319,21 +319,33 @@ export default function JobDescription() {
                     className="h-28 sm:h-32 w-auto shadow-md rounded-md"
                   />
                 </div>
-                <div className="flex items-center gap-3 text-muted-foreground">
-                  <Mail className="h-4 w-4 text-blue-400" />
-                  <Link href="mailto:jbaitinger@hellertownpd.org" className="hover:text-blue-400 transition-colors">
-                    jbaitinger@hellertownpd.org
-                  </Link>
+                <div className="flex items-start gap-3">
+                  <Mail className="h-4 w-4 text-blue-400 mt-1 shrink-0" />
+                  <div>
+                    <span className="font-semibold text-foreground">Chief of Police</span>
+                    <Link
+                      href="mailto:jbaitinger@hellertownpd.org"
+                      className="block text-blue-400 hover:underline break-all"
+                    >
+                      jbaitinger@hellertownpd.org
+                    </Link>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 text-muted-foreground">
-                  <Mail className="h-4 w-4 text-blue-400" />
-                  <Link href="mailto:csmith@hellertownpd.org" className="hover:text-blue-400 transition-colors">
-                    csmith@hellertownpd.org
-                  </Link>
+                <div className="flex items-start gap-3">
+                  <Mail className="h-4 w-4 text-blue-400 mt-1 shrink-0" />
+                  <div>
+                    <span className="font-semibold text-foreground">Executive Secretary</span>
+                    <Link
+                      href="mailto:csmith@hellertownpd.org"
+                      className="block text-blue-400 hover:underline break-all"
+                    >
+                      csmith@hellertownpd.org
+                    </Link>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 text-muted-foreground">
-                  <MapPin className="h-4 w-4 text-blue-400" />
-                  <span>685 Main Street, Hellertown, PA 18055</span>
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-4 w-4 text-blue-400 mt-1 shrink-0" />
+                  <span className="text-muted-foreground">685 Main Street, Hellertown, PA 18055</span>
                 </div>
               </CardContent>
             </Card>
