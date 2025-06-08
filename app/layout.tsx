@@ -17,7 +17,7 @@ export const metadata = {
     siteName: "Hellertown Borough Police Department Careers",
     images: [
       {
-        url: "/og-image.png", // Path to your OG image
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Hellertown Police Department Badge",
