@@ -7,7 +7,8 @@ import Link from "next/link"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function JobDescription() {
-  const applicationPdfUrl = "/Hellertown_PD_Application_Packet.pdf"
+  const applicationPdfUrl =
+    "https://68cr1faiqcppjjtf.public.blob.vercel-storage.com/HellertownPDApp-blItVXwcova43GwoovMGNC1ndCdb1s.pdf"
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased">
