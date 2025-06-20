@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 13% 91%; /* Light mode background - Lighter Gray */
+    --foreground: 224 71% 4%; /* Light mode text - Dark Blue/Black */
+
+    --card: 220 13% 96%; /* Light mode card background - Very Light Gray */
+    --card-foreground: 224 71% 4%; /* Light mode card text */
+
+    --popover: 220 13% 96%;
+    --popover-foreground: 224 71% 4%;
+
+    --primary: 217 91% 60%; /* Light mode primary - Blue */
+    --primary-foreground: 210 20% 98%; /* Light mode primary text - White */
+
+    --secondary: 220 14% 96%; /* Light mode secondary - Light Gray */
+    --secondary-foreground: 224 71% 4%; /* Light mode secondary text */
+
+    --muted: 220 9% 46%; /* Light mode muted text - Medium Gray */
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 217 91% 60%; /* Light mode accent - Blue */
+    --accent-foreground: 210 20% 98%; /* Light mode accent text */
+
+    --destructive: 0 72% 51%; /* Light mode destructive - Red */
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 13% 86%; /* Light mode border - Gray */
+    --input: 220 13% 86%;
+    --ring: 217 91% 60%;
+
+    --badge: 47 95% 44%; /* Yellow for badge */
+    --badge-foreground: 224 71% 4%; /* Dark text for badge */
+  }
+
+  .dark {
+    --background: 224 71% 4%; /* Dark mode background - Very Dark Blue/Black */
+    --foreground: 210 20% 98%; /* Dark mode text - Light Gray/White */
+
+    --card: 224 71% 9%; /* Dark mode card background - Darker Blue/Black */
+    --card-foreground: 210 20% 98%; /* Dark mode card text */
+
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 210 20% 98%; /* Dark mode primary - Light Gray/White */
+    --primary-foreground: 224 71% 4%; /* Dark mode primary text - Dark Blue/Black */
+
+    --secondary: 215 28% 17%; /* Dark mode secondary - Dark Gray */
+    --secondary-foreground: 210 20% 98%; /* Dark mode secondary text */
+
+    --muted: 215 20% 30%; /* Dark mode muted text - Medium Dark Gray */
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 210 20% 98%; /* Dark mode accent - Light Gray/White */
+    --accent-foreground: 224 71% 4%;
+
+    --destructive: 0 63% 31%; /* Dark mode destructive - Dark Red */
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 215 28% 17%; /* Dark mode border - Dark Gray */
+    --input: 215 28% 17%;
+    --ring: 210 20% 98%;
+
+    --badge: 47 95% 44%; /* Yellow for badge */
+    --badge-foreground: 224 71% 4%; /* Dark text for badge */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+}
