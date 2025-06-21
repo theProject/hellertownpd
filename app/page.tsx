@@ -32,6 +32,7 @@ import {
 } from "lucide-react"
 import { WeatherWidget } from "@/components/weather-widget"
 import { TrafficWidget } from "@/components/traffic-widget"
+import { EmergencyResponseWidget } from "@/components/emergency-response-widget"
 
 const communityReviews = [
   {
@@ -87,7 +88,24 @@ export default function HomePage() {
           <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
             Serving our community with integrity, dedication, and professionalism since 1872
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3 flex items-center justify-center gap-3">
+              <Activity className="h-8 w-8 text-primary" />
+              Community Cards
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Stay informed with real-time updates on weather, traffic, and emergency responses in the Hellertown area
+            </p>
+          </div>
+
+          {/* Community Information Widgets */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8 max-w-6xl mx-auto">
+            <WeatherWidget />
+            <TrafficWidget />
+            <EmergencyResponseWidget />
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
               <Link href="/jobs">
                 <Shield className="mr-2 h-5 w-5" />
@@ -100,12 +118,6 @@ export default function HomePage() {
                 Contact Us
               </Link>
             </Button>
-          </div>
-
-          {/* Weather and Traffic Widgets */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 max-w-4xl mx-auto">
-            <WeatherWidget />
-            <TrafficWidget />
           </div>
         </section>
 
