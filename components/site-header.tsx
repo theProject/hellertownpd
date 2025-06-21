@@ -1,16 +1,17 @@
 "use client"
 
 import Link from "next/link"
-import { Shield, Menu } from 'lucide-react'
+import Image from "next/image"
+import { Menu, Phone, MapPin } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { useState } from "react"
 
 const navItems = [
-  { href: "/", label: "Current Opening" },
+  { href: "/", label: "Home" },
+  { href: "/jobs", label: "Current Opening" },
   { href: "/events/national-night-out", label: "Events" },
-  { href: "/about-hpd", label: "About HPD" },
   { href: "/contact", label: "Contact Us" },
 ]
 
@@ -22,17 +23,47 @@ export function SiteHeader() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex items-center justify-between">
           {/* Branding */}
-          <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
-            <div className="bg-yellow-500 p-2 sm:p-3 rounded-full shadow group-hover:scale-105 transition-transform">
-              <Shield className="h-7 w-7 sm:h-8 sm:w-8 text-black" />
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Badge */}
+            <Link href="/" className="flex items-center group" prefetch={false}>
+              <div className="p-2 sm:p-3 rounded-full shadow group-hover:scale-105 transition-transform">
+                <Image
+                  src="/images/hellertown-badge.svg"
+                  alt="Hellertown Police Department Badge"
+                  width={64}
+                  height={64}
+                  className="h-14 w-14 sm:h-16 sm:w-16"
+                />
+              </div>
+            </Link>
+
+            {/* Department name and contact info */}
+            <div className="flex flex-col">
+              <Link href="/" className="group" prefetch={false}>
+                <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
+                  Hellertown Police Department
+                </h1>
+              </Link>
+
+              {/* Contact info below title */}
+              <div className="text-xs text-muted-foreground mt-1 flex items-center gap-3">
+                <a href="tel:+16103302200" className="flex items-center gap-1 hover:text-primary transition-colors">
+                  <Phone className="h-3 w-3" />
+                  (610) 330-2200
+                </a>
+                <span className="text-muted-foreground/50">•</span>
+                <a
+                  href="https://maps.google.com/maps?q=685+Main+St,+Hellertown,+PA+18055-1745"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 hover:text-primary transition-colors"
+                >
+                  <MapPin className="h-3 w-3" />
+                  685 Main St, Hellertown, PA 18055
+                </a>
+              </div>
             </div>
-            <div>
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
-                Hellertown Borough P.D.
-              </h1>
-              <p className="hidden sm:block text-xs text-muted-foreground">Northampton County, PA</p>
-            </div>
-          </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-4 lg:gap-6">
@@ -66,8 +97,14 @@ export function SiteHeader() {
                         className="flex items-center gap-3 group"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        <div className="bg-yellow-500 p-2 rounded-full shadow group-hover:scale-105 transition-transform">
-                          <Shield className="h-6 w-6 text-black" />
+                        <div className="p-2 rounded-full shadow group-hover:scale-105 transition-transform">
+                          <Image
+                            src="/images/hellertown-badge.svg"
+                            alt="Hellertown Police Department Badge"
+                            width={48}
+                            height={48}
+                            className="h-12 w-12"
+                          />
                         </div>
                         <span className="font-bold text-foreground group-hover:text-primary transition-colors">
                           Menu
@@ -86,6 +123,31 @@ export function SiteHeader() {
                         {item.label}
                       </Link>
                     ))}
+                    {/* Contact info in mobile menu */}
+                    <div className="mt-4 pt-4 border-t border-border">
+                      <div className="text-sm text-muted-foreground space-y-2">
+                        <p className="font-medium">Contact Information:</p>
+                        <p className="flex items-center gap-2">
+                          <Phone className="h-4 w-4" />
+                          <a href="tel:+16103302200" className="hover:text-primary transition-colors">
+                            (610) 330-2200
+                          </a>
+                        </p>
+                        <p className="flex items-start gap-2">
+                          <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                          <a
+                            href="https://maps.google.com/maps?q=685+Main+St,+Hellertown,+PA+18055-1745"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-primary transition-colors"
+                          >
+                            685 Main St
+                            <br />
+                            Hellertown, PA 18055
+                          </a>
+                        </p>
+                      </div>
+                    </div>
                   </nav>
                 </SheetContent>
               </Sheet>
