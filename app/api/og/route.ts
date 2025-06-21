@@ -19,5 +19,5 @@ export async function GET() {
   // Pick a random one
   const randomImage = variants[Math.floor(Math.random() * variants.length)];
 
-  return Response.redirect(`https://hellertownpolice.org${image}`, 302); // Use your actual domain here
+  return Response.redirect(`https://hellertownpolice.org${randomImage}`, 302); 
 }
