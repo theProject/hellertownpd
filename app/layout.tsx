@@ -14,11 +14,11 @@ export const metadata = {
     title: "Career Opportunity: Police Officer - Hellertown Borough Police Department",
     description:
       "Now hiring Entry-Level Police Officers. Serve your community with integrity and dedication. Apply today!",
-    url: "https://hellertownpolice.com", // Replace with your actual deployed domain
+    url: "https://hellertownpolice.org", // Replace with your actual deployed domain
     siteName: "Hellertown Borough Police Department Careers",
     images: [
       {
-        url: "https://hellertownpolice.com/api/og", // Dynamically rendered OG image
+        url: "https://hellertownpolice.org/api/og", // Dynamically rendered OG image
         width: 1200,
         height: 630,
         alt: "Hellertown Police Now Hiring – Rotating Image by Time of Day",
@@ -31,7 +31,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Career Opportunity: Police Officer - Hellertown Borough Police Department",
     description: "Join the Hellertown PD! Now hiring Entry-Level Police Officers. Make a difference in your community.",
-    images: ["https://hellertownpolice.com/api/og"], // Same dynamic image for Twitter
+    images: ["https://hellertownpolice.org/api/og"], // Same dynamic image for Twitter
   },
 
 }

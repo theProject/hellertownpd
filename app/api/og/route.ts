@@ -7,5 +7,5 @@ export async function GET() {
   if (hour >= 12 && hour < 17) image = "/og-afternoon.jpg";
   else if (hour >= 17 || hour < 6) image = "/og-evening.jpg";
 
-  return Response.redirect(`https://hellertownpd.com${image}`, 302); // Use your actual domain here
+  return Response.redirect(`https://hellertownpolice.org${image}`, 302); // Use your actual domain here
 }
