@@ -31,6 +31,7 @@ import {
   Quote,
 } from "lucide-react"
 import { WeatherWidget } from "@/components/weather-widget"
+import { TrafficWidget } from "@/components/traffic-widget"
 
 const communityReviews = [
   {
@@ -101,11 +102,10 @@ export default function HomePage() {
             </Button>
           </div>
 
-          {/* Weather Widget */}
-          <div className="flex justify-center mt-8">
-            <div className="w-full max-w-md">
-              <WeatherWidget />
-            </div>
+          {/* Weather and Traffic Widgets */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 max-w-4xl mx-auto">
+            <WeatherWidget />
+            <TrafficWidget />
           </div>
         </section>
 
