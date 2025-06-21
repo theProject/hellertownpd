@@ -2,36 +2,27 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Shield, Mail, MapPin, Users, Award, CheckCircle, Calendar, FileText, Download } from "lucide-react"
+import {
+  Shield,
+  Mail,
+  MapPin,
+  Users,
+  Award,
+  CheckCircle,
+  Calendar,
+  FileText,
+  Download,
+  BookOpen,
+  Globe,
+} from "lucide-react" // Added Globe
 import Link from "next/link"
-import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function JobDescription() {
-  const applicationPdfUrl = "/Hellertown_PD_Application_Packet.pdf"
+  const applicationPdfUrl =
+    "https://68cr1faiqcppjjtf.public.blob.vercel-storage.com/HellertownPDApp-blItVXwcova43GwoovMGNC1ndCdb1s.pdf"
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased">
-      {/* Header */}
-      <header className="bg-card border-b border-border shadow-lg sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="bg-yellow-500 p-2 sm:p-3 rounded-full shadow">
-                <Shield className="h-7 w-7 sm:h-8 sm:w-8 text-black" />
-              </div>
-              <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-foreground leading-tight">
-                  Hellertown Borough Police Department
-                </h1>
-                <p className="text-xs sm:text-sm text-muted-foreground">Northampton County, Pennsylvania</p>
-                <p className="text-xs sm:text-sm text-yellow-400 font-semibold">Incorporated 1812</p>
-              </div>
-            </div>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
-
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Job Title Section */}
         <div className="text-center my-8 sm:my-12">
@@ -298,6 +289,34 @@ export default function JobDescription() {
                     Medical Exam including Drug Screening
                   </li>
                 </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card border-border shadow-sm hover:shadow-md transition-shadow duration-300">
+              <CardHeader>
+                <CardTitle className="text-foreground flex items-center gap-2 text-xl sm:text-2xl">
+                  <BookOpen className="h-5 w-5 sm:h-6 sm:w-6 text-teal-400" />
+                  POST Test Preparation
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 text-muted-foreground text-sm sm:text-base">
+                <p>
+                  Familiarize yourself with the official Standard and Associates POST training materials to prepare for
+                  the examination by visiting:
+                </p>
+                <Link
+                  href="https://www.applytoserve.com/Study/"
+                  className="text-blue-400 hover:underline font-medium inline-flex items-center gap-2 break-all"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Globe className="h-4 w-4" />
+                  https://www.applytoserve.com/Study/
+                </Link>
+                <p className="text-xs text-muted-foreground/80 italic pt-2">
+                  Thorough preparation is a cornerstone of success. Utilize the available study guide and practice exam
+                  to sharpen your focus and present your strongest performance.
+                </p>
               </CardContent>
             </Card>
           </div>

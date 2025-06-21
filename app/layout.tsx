@@ -2,6 +2,7 @@ import type React from "react"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Inter } from "next/font/google"
+import { SiteHeader } from "@/components/site-header" // Import the new SiteHeader
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -17,10 +18,10 @@ export const metadata = {
     siteName: "Hellertown Borough Police Department Careers",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Hellertown Police Department Badge",
+        url: "/og-image-hiring.png",
+        width: 1000,
+        height: 1500,
+        alt: "Hellertown Police Now Hiring - The Pride of Pennsylvania",
       },
     ],
     locale: "en_US",
@@ -30,7 +31,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Career Opportunity: Police Officer - Hellertown Borough Police Department",
     description: "Join the Hellertown PD! Now hiring Entry-Level Police Officers. Make a difference in your community.",
-    images: ["/og-image.png"], // Path to your Twitter image
+    images: ["/og-image-hiring.png"],
   },
     generator: 'v0.dev'
 }
@@ -51,6 +52,7 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          <SiteHeader /> {/* Add the SiteHeader here */}
           {children}
         </ThemeProvider>
       </body>
