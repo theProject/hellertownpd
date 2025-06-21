@@ -3,6 +3,7 @@ import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Inter } from "next/font/google"
 import { SiteHeader } from "@/components/site-header"
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -43,16 +44,30 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={inter.className}>
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
-        <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-      </head>
+<head>
+  {/* Google tag Analytics(gtag.js) */}
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V25BP4Z4GM"></script>
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-V25BP4Z4GM');
+      `,
+    }}
+  />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+</head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <SiteHeader />
+          <Analytics />
+          {/* Main content area */}
           {children}
         </ThemeProvider>
       </body>
