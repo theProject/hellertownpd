@@ -16,13 +16,13 @@ export async function GET() {
 
   if (hour >= 6 && hour < 12) {
     // Morning opengraph images
-    variants = ["og-morning.png", "og-morning-2.PNG"];
+    variants = ["og-morning.png", "og-image.png"];
   } else if (hour >= 12 && hour < 17) {
     // Afternoon open graph images
-    variants = ["og-afternoon-1.png", "og-afternoon.png"];
+    variants = ["og-afternoon-1.png", "og-afternoon.png", "og-image-hiring.png"];
   } else {
     // Evening & late- night open graph images
-    variants = ["og-evening.png", "og-evening-1.PNG"];
+    variants = ["og-evening.png", "og-image.png"];
   }
 
   // Lil algorithm to pick a random one during all three phases of the day

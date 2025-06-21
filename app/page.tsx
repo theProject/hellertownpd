@@ -30,6 +30,7 @@ import {
   Star,
   Quote,
 } from "lucide-react"
+import { WeatherWidget } from "@/components/weather-widget"
 
 const communityReviews = [
   {
@@ -98,6 +99,13 @@ export default function HomePage() {
                 Contact Us
               </Link>
             </Button>
+          </div>
+
+          {/* Weather Widget */}
+          <div className="flex justify-center mt-8">
+            <div className="w-full max-w-md">
+              <WeatherWidget />
+            </div>
           </div>
         </section>
 

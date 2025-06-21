@@ -52,7 +52,7 @@ export const metadata = {
     "msapplication-TileColor": "#1e3a8a",
     "theme-color": "#1e3a8a",
   },
-
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
