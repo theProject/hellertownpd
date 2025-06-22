@@ -12,21 +12,15 @@ export const runtime = "edge";
 export async function GET() {
   const hour = new Date().getHours();
 
-  let variants: string[] = [];
+  let imagePath = "/og/";
 
   if (hour >= 6 && hour < 12) {
-    // Morning opengraph images
-    variants = ["og-morning.png"];
+    imagePath += "og-morning.png";
   } else if (hour >= 12 && hour < 17) {
-    // Afternoon open graph images
-    variants = ["og-afternoon-1.png", "og-afternoon.png", "og-image-hiring.png"];
+    imagePath += "og-afternoon.png";
   } else {
-    // Evening & late- night open graph images
-    variants = ["og-evening.png"];
+    imagePath += "og-evening.png";
   }
 
-  // Lil algorithm to pick a random one during all three phases of the day
-  const randomImage = variants[Math.floor(Math.random() * variants.length)];
-
-  return Response.redirect(`https://hellertownpolice.org${randomImage}`, 302); 
+  return Response.redirect(`https://hellertownpolice.org${imagePath}`, 302);
 }
