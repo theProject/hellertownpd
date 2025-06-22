@@ -12,7 +12,7 @@ export const runtime = "edge";
 export async function GET() {
   const hour = new Date().getHours();
 
-  let imagePath = "/og/";
+  let imagePath = "/";
 
   if (hour >= 6 && hour < 12) {
     imagePath += "og-morning.png";
