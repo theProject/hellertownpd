@@ -17,7 +17,7 @@ export async function GET() {
   if (hour >= 6 && hour < 12) {
     imagePath += "og-morning.png";
   } else if (hour >= 12 && hour < 17) {
-    imagePath += "og-afternoon.png";
+    imagePath += "og-afternoon.jpg";
   } else {
     imagePath += "og-evening.png";
   }
