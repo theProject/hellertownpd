@@ -26,7 +26,7 @@ export const metadata = {
     siteName: "Hellertown Borough Police Department",
     images: [
       {
-        url: "https://hellertownpolice.org/api/og", // 🔥 Now uses your dynamic route!
+        url: "https://hellertownpolice.org/api/og/", // 🔥 Now uses your dynamic route!
         width: 1200,
         height: 630,
         alt: "Hellertown Police Department - Dynamic image based on time of day",
@@ -41,7 +41,7 @@ export const metadata = {
     title: "Hellertown Borough Police Department - Serving Our Community Since 1872",
     description:
       "Official website of the Hellertown Borough Police Department. Now hiring 3 Full-Time Entry-Level Police Officers.",
-    images: ["https://hellertownpolice.org/api/og"], // 🔥 Dynamic for Twitter too!
+    images: ["https://hellertownpolice.org/api/og/"], // 🔥 Dynamic for Twitter too!
     creator: "@hellertownpd",
     site: "@hellertownpd",
   },
@@ -102,7 +102,7 @@ export default function RootLayout({
               alternateName: "Hellertown Police",
               url: "https://hellertownpolice.org",
               logo: "https://hellertownpolice.org/images/hellertown-badge.svg",
-              image: "https://hellertownpolice.org/api/og", // 🔥 Dynamic image in schema too!
+              image: "https://hellertownpolice.org/api/og/", // 🔥 Dynamic image in schema too!
               description:
                 "Official website of the Hellertown Borough Police Department serving Northampton County, Pennsylvania since 1872.",
               address: {
