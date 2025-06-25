@@ -30,7 +30,7 @@ export const metadata = {
     siteName: "Hellertown Borough Police Department",
     images: [
       {
-        url: "https://hellertownpolice.org/og/jobs.jpg", // Place this image in /public/og/
+        url: "https://hellertownpolice.org/og/og-image-hiring.png", // Place this image in /public/og/
         width: 1200,
         height: 630,
         alt: "Hellertown PD Recruitment",
