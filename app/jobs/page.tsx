@@ -17,6 +17,43 @@ import {
 } from "lucide-react" // Added Globe
 import Link from "next/link"
 
+//meta
+export const metadata = {
+  title: "Now Hiring – Hellertown Borough Police Department",
+  description:
+    "Apply now for one of 3 Full-Time Entry-Level Police Officer positions in Hellertown, PA. Serve your community with pride, integrity, and purpose.",
+  openGraph: {
+    title: "Now Hiring – Hellertown Police Department",
+    description:
+      "We're actively hiring new officers. Competitive salary, benefits, and a commitment to community. Apply by July 16, 2025.",
+    url: "https://hellertownpolice.org/jobs",
+    siteName: "Hellertown Borough Police Department",
+    images: [
+      {
+        url: "https://hellertownpolice.org/og/jobs.jpg", // Place this image in /public/og/
+        width: 1200,
+        height: 630,
+        alt: "Hellertown PD Recruitment",
+        type: "image/jpeg",
+      },
+    ],
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Join the Hellertown Police Department – Now Hiring",
+    description:
+      "Hellertown Borough PD is hiring 3 new officers. Download the application packet and start your career today.",
+    images: ["https://hellertownpolice.org/og/jobs.jpg"],
+    creator: "@hellertownpd",
+    site: "@hellertownpd",
+  },
+  alternates: {
+    canonical: "https://hellertownpolice.org/jobs",
+  },
+}
+
 export default function JobDescription() {
   const applicationPdfUrl =
     "https://68cr1faiqcppjjtf.public.blob.vercel-storage.com/HellertownPDApp-blItVXwcova43GwoovMGNC1ndCdb1s.pdf"
