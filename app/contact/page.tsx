@@ -24,11 +24,11 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Contact Us - Hellertown Borough Police Department",
   description:
-    "Contact the Hellertown Borough Police Department. Emergency: 911, Non-Emergency: (610) 330-2200. Located at 685 Main Street, Hellertown, PA 18055.",
+    "Contact the Hellertown Borough Police Department. Emergency: 911, Non-Emergency: (610) 838-7040. Located at 685 Main Street, Hellertown, PA 18055.",
   openGraph: {
     title: "Contact Us - Hellertown Borough Police Department",
     description:
-      "Contact the Hellertown Borough Police Department. Emergency: 911, Non-Emergency: (610) 330-2200. Located at 685 Main Street, Hellertown, PA 18055.",
+      "Contact the Hellertown Borough Police Department. Emergency: 911, Non-Emergency: (610) 838-7040. Located at 685 Main Street, Hellertown, PA 18055.",
     url: "https://hellertownpolice.org/contact",
     siteName: "Hellertown Borough Police Department",
     images: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Contact Us - Hellertown Borough Police Department",
-    description: "Contact the Hellertown Borough Police Department. Emergency: 911, Non-Emergency: (610) 330-2200.",
+    description: "Contact the Hellertown Borough Police Department. Emergency: 911, Non-Emergency: (610) 838-7040.",
     images: ["https://hellertownpolice.org/api/og"],
   },
 }
@@ -207,11 +207,11 @@ export default function ContactPage() {
                             jbaitinger@hellertownpd.org
                           </a>
                           <a
-                            href="tel:+16103302200"
+                            href="tel:+16108387040"
                             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-blue-600 transition-colors"
                           >
                             <Phone className="h-4 w-4" />
-                            (610) 330-2200
+                            (610) 838-7040
                           </a>
                         </div>
                       </div>
@@ -225,7 +225,7 @@ export default function ContactPage() {
                         <Building className="h-5 w-5 text-green-600" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-foreground text-lg">C. Smith</h4>
+                        <h4 className="font-semibold text-foreground text-lg">Carrie Smith</h4>
                         <p className="text-sm text-green-600 font-medium mb-2">Executive Secretary</p>
                         <div className="space-y-2">
                           <a
@@ -236,11 +236,11 @@ export default function ContactPage() {
                             csmith@hellertownpd.org
                           </a>
                           <a
-                            href="tel:+16103302200"
+                            href="tel:+16108387040"
                             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-green-600 transition-colors"
                           >
                             <Phone className="h-4 w-4" />
-                            (610) 330-2200
+                            (610) 838-7040
                           </a>
                         </div>
                       </div>
@@ -327,9 +327,9 @@ export default function ContactPage() {
                   </a>
                 </Button>
                 <Button variant="outline" className="w-full" asChild>
-                  <a href="tel:+16103302200">
+                  <a href="tel:+16108387040">
                     <Phone className="mr-2 h-4 w-4" />
-                    Non-Emergency: (610) 330-2200
+                    Non-Emergency: (610) 838-7040
                   </a>
                 </Button>
                 <Button variant="outline" className="w-full" asChild>
@@ -441,8 +441,8 @@ export default function ContactPage() {
           </div>
           <p className="text-sm">
             For immediate assistance, please call our non-emergency line at{" "}
-            <a href="tel:+16103302200" className="text-blue-400 hover:underline font-medium">
-              (610) 330-2200
+            <a href="tel:+16108387040" className="text-blue-400 hover:underline font-medium">
+              (610) 838-7040
             </a>{" "}
             or email{" "}
             <a href="mailto:jbaitinger@hellertownpd.org" className="text-blue-400 hover:underline font-medium">
