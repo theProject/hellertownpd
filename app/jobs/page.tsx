@@ -34,7 +34,7 @@ export const metadata = {
         width: 1200,
         height: 630,
         alt: "Hellertown PD Recruitment",
-        type: "image/jpeg",
+        type: "image/png",
       },
     ],
     type: "website",
@@ -45,7 +45,7 @@ export const metadata = {
     title: "Join the Hellertown Police Department – Now Hiring",
     description:
       "Hellertown Borough PD is hiring 3 new officers. Download the application packet and start your career today.",
-    images: ["https://hellertownpolice.org/og/jobs.jpg"],
+    images: ["https://hellertownpolice.org/og-image-hiring.png"],
     creator: "@hellertownpd",
     site: "@hellertownpd",
   },
