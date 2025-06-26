@@ -48,9 +48,9 @@ export function SiteHeader() {
 
               {/* Contact info below title */}
               <div className="text-xs text-muted-foreground mt-1 flex items-center gap-3">
-                <a href="tel:+16103302200" className="flex items-center gap-1 hover:text-primary transition-colors">
+                <a href="tel:+16108387040" className="flex items-center gap-1 hover:text-primary transition-colors">
                   <Phone className="h-3 w-3" />
-                  (610) 330-2200
+                  (610) 838-7040
                 </a>
                 <span className="text-muted-foreground/50">•</span>
                 <a

@@ -148,10 +148,10 @@ export default function ContactPage() {
                           <p className="text-sm text-muted-foreground">General inquiries & reports</p>
                         </div>
                         <a
-                          href="tel:+16103302200"
+                          href="tel:+16108387040"
                           className="text-lg font-semibold text-blue-600 hover:text-blue-700 transition-colors"
                         >
-                          (610) 330-2200
+                          (610) 838-7040
                         </a>
                       </div>
                     </div>
