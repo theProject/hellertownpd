@@ -1,30 +1,66 @@
-# Law Enforcement Job Site
+🚔 Hellertown Police Department Website
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+Live public safety dashboard for the Borough of Hellertown, PA
+Developed and maintained by theProject. in partnership with the Hellertown Police Department
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/the-project-dev/v0-law-enforcement-job-site)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/GCKMdTvwpvj)
+Visit Site →
 
-## Overview
+⸻
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+🧰 Tech Stack
+	•	Framework: Next.js with React & TypeScript
+	•	Weather API: OpenWeather
+	•	Traffic & Emergency Feeds: Powered by trusted state-level APIs (e.g., PennDOT, 511PA)
+	•	Deployment: Vercel (with optimized edge functions for speed and reliability)
 
-## Deployment
+⸻
 
-Your project is live at:
+🌐 Project Overview
 
-**[https://vercel.com/the-project-dev/v0-law-enforcement-job-site](https://vercel.com/the-project-dev/v0-law-enforcement-job-site)**
+This official website serves as the digital front for the Hellertown Police Department, offering a modern, responsive, and accessible experience for residents and visitors. The platform is purpose-built to enhance community awareness, safety, and engagement.
 
-## Build your app
+⸻
 
-Continue building your app on:
+🔥 Live Features
 
-**[https://v0.dev/chat/projects/GCKMdTvwpvj](https://v0.dev/chat/projects/GCKMdTvwpvj)**
+🌤️ Real-Time Local Weather
+	•	Accurate, hyper-local conditions powered by OpenWeather
+	•	Real-time status and camera feeds tuned to Hellertown & surrounding Lehigh Valley
 
-## How It Works
+🚗 Road Conditions & Live Traffic
+	•	Current traffic flow, incidents, construction, and detours
+	•	Data sourced from 511PA and PennDOT, covering major borough routes
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+🚨 Emergency Response Cards
+	•	Displays active incidents (e.g., accidents, medical, fire) in real time
+	•	Prioritizes clarity without compromising operational safety
+
+⸻
+
+🧭 In Development
+
+🕵️ Anonymous Crime Reporting
+
+Secure form for submitting non-emergency tips without disclosing personal identity.
+
+🎯 Featured & Wanted Subjects
+
+Spotlight system for ongoing investigations and individuals wanted for questioning or apprehension.
+
+📱 Alert Opt-In
+
+Planned push notification and SMS system for borough-wide emergencies, detours, or civic events.
+
+⸻
+
+📜 License & Ownership
+
+This repository and its contents are proprietary and developed exclusively by theProject. for the Hellertown Police Department.
+All rights reserved. Unauthorized use, distribution, or replication is strictly prohibited.
+
+⸻
+
+🤝 Acknowledgments
+	•	Hellertown Borough & Police Department leadership
+	•	Local residents for continued feedback and civic support
+	•	Public data services including OpenWeather and 511PA for integration support
