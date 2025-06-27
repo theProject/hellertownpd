@@ -225,7 +225,7 @@ export default function JobDescription() {
                 <div className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-2">
                   <span className="font-semibold text-foreground shrink-0">Deadline to Apply:</span>
                   <div>
-                    <p className="font-medium">Friday, July 16, 2025</p>
+                    <p className="font-medium">Wednesday, July 16, 2025</p>
                     <p className="text-xs sm:text-sm text-muted-foreground/80">
                       Applications must be submitted in person during normal business hours: 8:00 a.m. – 4:00 p.m.
                     </p>
