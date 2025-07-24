@@ -22,6 +22,7 @@ import {
   TrendingDown,
 } from "lucide-react"
 
+// Interfaces to structure the final, processed data for the component
 interface WeatherData {
   temperature: number
   condition: string
@@ -49,7 +50,7 @@ interface WeatherAlert {
 
 interface HistoricalWeather {
   temperature: number
-  condition: string
+  condition:string
   high: number
   low: number
   year: number
@@ -61,7 +62,7 @@ const getWeatherIcon = (condition: string, size = "h-8 w-8") => {
     return <CloudRain className={`${size} text-blue-500`} />
   } else if (lowerCondition.includes("snow")) {
     return <CloudSnow className={`${size} text-blue-200`} />
-  } else if (lowerCondition.includes("cloud")) {
+  } else if (lowerCondition.includes("clouds")) {
     return <Cloud className={`${size} text-gray-500`} />
   } else {
     return <Sun className={`${size} text-yellow-500`} />
@@ -72,10 +73,11 @@ const getSmallWeatherIcon = (condition: string) => {
   const lowerCondition = condition.toLowerCase()
   if (lowerCondition.includes("rain")) return <CloudRain className="h-4 w-4 text-blue-500" />
   if (lowerCondition.includes("snow")) return <Snowflake className="h-4 w-4 text-blue-200" />
-  if (lowerCondition.includes("cloud")) return <Cloud className="h-4 w-4 text-gray-500" />
+  if (lowerCondition.includes("clouds")) return <Cloud className="h-4 w-4 text-gray-500" />
   return <Sun className="h-4 w-4 text-yellow-500" />
 }
 
+// Your custom seasonal alert logic remains, now driven by real data!
 const getCurrentSeason = () => {
   const month = new Date().getMonth() + 1 // 1-12
   if (month >= 3 && month <= 5) return "spring"
@@ -96,22 +98,7 @@ const getSeasonalAlerts = (weather: WeatherData, season: string): WeatherAlert[]
           severity: "medium",
         })
       }
-      if (Math.random() > 0.7) {
-        alerts.push({
-          type: "Summer Safety Tip",
-          message: "Peak vacation season: Secure your home before traveling and use timer lights.",
-          severity: "low",
-        })
-      }
-      if (weather.humidity > 70) {
-        alerts.push({
-          type: "Air Quality Notice",
-          message: "High humidity may affect air quality. Limit outdoor activities if sensitive.",
-          severity: "low",
-        })
-      }
       break
-
     case "winter":
       if (weather.temperature < 32) {
         alerts.push({
@@ -120,23 +107,8 @@ const getSeasonalAlerts = (weather: WeatherData, season: string): WeatherAlert[]
           severity: "medium",
         })
       }
-      if (Math.random() > 0.8) {
-        alerts.push({
-          type: "Winter Safety Tip",
-          message: "Ice possible on roads and walkways. Drive carefully and salt walkways.",
-          severity: "medium",
-        })
-      }
       break
-
     case "spring":
-      if (Math.random() > 0.7) {
-        alerts.push({
-          type: "Spring Safety Tip",
-          message: "Severe weather season begins. Review your emergency plans and weather radio.",
-          severity: "low",
-        })
-      }
       if (weather.windSpeed > 15) {
         alerts.push({
           type: "Wind Advisory",
@@ -145,15 +117,7 @@ const getSeasonalAlerts = (weather: WeatherData, season: string): WeatherAlert[]
         })
       }
       break
-
     case "fall":
-      if (Math.random() > 0.7) {
-        alerts.push({
-          type: "Fall Safety Tip",
-          message: "Daylight saving time ends soon. Check smoke detector batteries.",
-          severity: "low",
-        })
-      }
       if (weather.temperature < 45) {
         alerts.push({
           type: "First Frost Warning",
@@ -163,18 +127,9 @@ const getSeasonalAlerts = (weather: WeatherData, season: string): WeatherAlert[]
       }
       break
   }
-
-  // General safety tips that apply year-round
-  if (Math.random() > 0.8) {
-    alerts.push({
-      type: "Community Safety Tip",
-      message: "Remember to lock vehicles and remove valuables. Report suspicious activity to HPD.",
-      severity: "low",
-    })
-  }
-
   return alerts
 }
+
 
 export function WeatherWidget() {
   const [weather, setWeather] = useState<WeatherData | null>(null)
@@ -187,94 +142,75 @@ export function WeatherWidget() {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000))
+        const res = await fetch("/api/weather")
+        if (!res.ok) {
+          throw new Error("Failed to fetch weather data from server")
+        }
+        const data = await res.json()
+
+        // --- Map API data to component state ---
+
+        // 1. Current Weather
+        const currentWeatherData: WeatherData = {
+          temperature: Math.round(data.current.temp),
+          feelsLike: Math.round(data.current.feels_like),
+          condition: data.current.weather[0]?.main || "Clear",
+          description: data.current.weather[0]?.description || "No description",
+          humidity: data.current.humidity,
+          windSpeed: Math.round(data.current.wind_speed),
+          visibility: Math.round(data.current.visibility / 1609), // meters to miles
+          pressure: data.current.pressure * 0.02953, // hPa to inHg
+        }
+        setWeather(currentWeatherData)
+
+        // 2. Forecast
+        const forecastData: ForecastDay[] = data.forecast.map((day: any, index: number) => ({
+          day:
+            index === 0
+              ? "Today"
+              : new Date(day.dt * 1000).toLocaleDateString("en-US", { weekday: "long" }),
+          high: Math.round(day.temp.max),
+          low: Math.round(day.temp.min),
+          condition: day.weather[0]?.main || "Clear",
+          precipitation: Math.round(day.pop * 100), // probability of precipitation
+        }))
+        setForecast(forecastData)
+
+        // 3. Historical Weather
+        if (data.historical) {
+            const historicalWeather: HistoricalWeather = {
+                temperature: Math.round(data.historical.temp),
+                condition: data.historical.weather[0]?.main || "Clear",
+                // Note: Historical API doesn't provide anything past 1/2/24 - going 5 years back
+              
+                high: Math.round(data.historical.temp) + 5, // Placeholder logic
+                low: Math.round(data.historical.temp) - 5,  // Placeholder logic
+                year: new Date(data.historical.dt * 1000).getFullYear(),
+            }
+            setHistorical(historicalWeather)
+        }
+
+        // 4. Alerts (API alerts + custom seasonal alerts)
+        const apiAlerts: WeatherAlert[] = (data.alerts || []).map((alert: any) => ({
+          type: alert.event,
+          message: alert.description,
+          severity: "high", // OpenWeatherMap alerts are usually significant
+        }));
 
         const season = getCurrentSeason()
-        const currentDate = new Date()
+        const seasonalAlerts = getSeasonalAlerts(currentWeatherData, season)
+        
+        setAlerts([...apiAlerts, ...seasonalAlerts]);
 
-        // Season-appropriate conditions
-        let conditions: string[]
-        let tempRange: { min: number; max: number }
-
-        switch (season) {
-          case "summer":
-            conditions = ["Sunny", "Partly Cloudy", "Thunderstorms", "Hot", "Humid"]
-            tempRange = { min: 70, max: 95 }
-            break
-          case "winter":
-            conditions = ["Clear", "Cloudy", "Snow", "Overcast", "Partly Cloudy"]
-            tempRange = { min: 20, max: 50 }
-            break
-          case "spring":
-            conditions = ["Partly Cloudy", "Light Rain", "Sunny", "Breezy", "Mild"]
-            tempRange = { min: 45, max: 75 }
-            break
-          case "fall":
-            conditions = ["Clear", "Partly Cloudy", "Overcast", "Cool", "Crisp"]
-            tempRange = { min: 40, max: 70 }
-            break
-          default:
-            conditions = ["Clear", "Partly Cloudy", "Cloudy"]
-            tempRange = { min: 40, max: 80 }
-        }
-
-        const currentCondition = conditions[Math.floor(Math.random() * conditions.length)]
-        const currentTemp = Math.round(Math.random() * (tempRange.max - tempRange.min) + tempRange.min)
-
-        const mockWeatherData: WeatherData = {
-          temperature: currentTemp,
-          condition: currentCondition,
-          humidity: Math.round(Math.random() * 40 + 40),
-          windSpeed: Math.round(Math.random() * 15 + 5),
-          visibility: Math.round(Math.random() * 5 + 5),
-          pressure: Math.round((Math.random() * 2 + 29) * 100) / 100,
-          feelsLike: currentTemp + Math.round(Math.random() * 10 - 5),
-          description: `Perfect ${season} weather for community policing`,
-        }
-
-        // 3-day forecast simulation
-        const days = ["Today", "Tomorrow", "Wednesday"]
-        const mockForecast: ForecastDay[] = days.map((day, index) => ({
-          day,
-          high: Math.round(Math.random() * (tempRange.max - tempRange.min) + tempRange.min),
-          low: Math.round(Math.random() * (tempRange.max - tempRange.min - 20) + tempRange.min - 10),
-          condition: conditions[Math.floor(Math.random() * conditions.length)],
-          precipitation: season === "summer" ? Math.round(Math.random() * 40) : Math.round(Math.random() * 60),
-        }))
-
-        // Historical weather for this day last year
-        const lastYear = currentDate.getFullYear() - 1
-        const historicalConditions =
-          season === "summer"
-            ? ["Sunny", "Hot", "Partly Cloudy", "Thunderstorms"]
-            : season === "winter"
-              ? ["Cold", "Snow", "Overcast", "Clear"]
-              : ["Mild", "Partly Cloudy", "Clear", "Breezy"]
-
-        const mockHistorical: HistoricalWeather = {
-          temperature: Math.round(Math.random() * (tempRange.max - tempRange.min) + tempRange.min),
-          condition: historicalConditions[Math.floor(Math.random() * historicalConditions.length)],
-          high: Math.round(Math.random() * (tempRange.max - tempRange.min) + tempRange.min),
-          low: Math.round(Math.random() * (tempRange.max - tempRange.min - 20) + tempRange.min - 10),
-          year: lastYear,
-        }
-
-        // Season-appropriate alerts
-        const seasonalAlerts = getSeasonalAlerts(mockWeatherData, season)
-
-        setWeather(mockWeatherData)
-        setForecast(mockForecast)
-        setAlerts(seasonalAlerts)
-        setHistorical(mockHistorical)
-        setLoading(false)
-      } catch (err) {
-        setError("Unable to fetch weather data")
+      } catch (err: any) {
+        setError(err.message || "Unable to fetch weather data")
+      } finally {
         setLoading(false)
       }
     }
 
     fetchWeather()
-    const interval = setInterval(fetchWeather, 10 * 60 * 1000)
+    const interval = setInterval(fetchWeather, 30 * 60 * 1000) // Fetch every 30 mins
     return () => clearInterval(interval)
   }, [])
 
@@ -308,7 +244,7 @@ export function WeatherWidget() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">Weather data unavailable</p>
+          <p className="text-sm text-muted-foreground">{error || "Weather data unavailable"}</p>
         </CardContent>
       </Card>
     )
@@ -324,7 +260,7 @@ export function WeatherWidget() {
             {getWeatherIcon(weather.condition, "h-5 w-5")}
             Hellertown Weather
           </CardTitle>
-          <Badge variant="secondary" className="text-xs">
+          <Badge className="text-xs bg-green-600 text-white">
             Live
           </Badge>
         </div>
@@ -337,8 +273,8 @@ export function WeatherWidget() {
             <div className="text-sm text-muted-foreground">Feels like {weather.feelsLike}°F</div>
           </div>
           <div className="text-right">
-            <div className="font-medium text-foreground">{weather.condition}</div>
-            <div className="text-xs text-muted-foreground">{weather.description}</div>
+            <div className="font-medium text-foreground capitalize">{weather.condition}</div>
+            <div className="text-xs text-muted-foreground capitalize">{weather.description}</div>
           </div>
         </div>
 
@@ -397,53 +333,54 @@ export function WeatherWidget() {
           </div>
         </div>
 
-        <Separator className="my-4" />
-
         {/* Historical Comparison */}
         {historical && (
-          <div>
-            <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-indigo-500" />
-              This Day Last Year ({historical.year})
-            </h4>
-            <div className="bg-muted/50 rounded-md p-3 space-y-2">
-              <div className="flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2">
-                  {getSmallWeatherIcon(historical.condition)}
-                  <span className="text-muted-foreground">{historical.condition}</span>
+          <>
+            <Separator className="my-4" />
+            <div>
+              <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-indigo-500" />
+                This Day Five Years Ago ({historical.year})
+              </h4>
+              <div className="bg-muted/50 rounded-md p-3 space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-2">
+                    {getSmallWeatherIcon(historical.condition)}
+                    <span className="text-muted-foreground">{historical.condition}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium text-foreground">
+                      {historical.high}°/{historical.low}°
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-foreground">
-                    {historical.high}°/{historical.low}°
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-center justify-between text-xs">
-                <span className="text-muted-foreground">Temperature comparison:</span>
-                <div className="flex items-center gap-1">
-                  {tempDifference > 0 ? (
-                    <TrendingUp className="h-3 w-3 text-red-500" />
-                  ) : tempDifference < 0 ? (
-                    <TrendingDown className="h-3 w-3 text-blue-500" />
-                  ) : null}
-                  <span
-                    className={`font-medium ${
-                      tempDifference > 0
-                        ? "text-red-600"
-                        : tempDifference < 0
-                          ? "text-blue-600"
-                          : "text-muted-foreground"
-                    }`}
-                  >
-                    {tempDifference > 0 ? "+" : ""}
-                    {tempDifference}° vs last year
-                  </span>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-muted-foreground">Temperature comparison:</span>
+                  <div className="flex items-center gap-1">
+                    {tempDifference > 0 ? (
+                      <TrendingUp className="h-3 w-3 text-red-500" />
+                    ) : tempDifference < 0 ? (
+                      <TrendingDown className="h-3 w-3 text-blue-500" />
+                    ) : null}
+                    <span
+                      className={`font-medium ${
+                        tempDifference > 0
+                          ? "text-red-600"
+                          : tempDifference < 0
+                            ? "text-blue-600"
+                            : "text-muted-foreground"
+                      }`}
+                    >
+                      {tempDifference > 0 ? "+" : ""}
+                      {tempDifference}° vs five years ago
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </>
         )}
-
+        
         {/* Weather Alerts */}
         {alerts.length > 0 && (
           <>
@@ -451,7 +388,7 @@ export function WeatherWidget() {
             <div>
               <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
                 <AlertTriangle className="h-4 w-4 text-amber-500" />
-                Weather Alerts
+                Alerts & Advisories
               </h4>
               <div className="space-y-2">
                 {alerts.map((alert, index) => (
@@ -466,7 +403,7 @@ export function WeatherWidget() {
                     }`}
                   >
                     <div className="font-medium text-foreground mb-1">{alert.type}</div>
-                    <div className="text-muted-foreground">{alert.message}</div>
+                    <p className="text-muted-foreground leading-relaxed">{alert.message}</p>
                   </div>
                 ))}
               </div>
