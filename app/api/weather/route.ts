@@ -9,7 +9,7 @@ const getDateForOneYearAgo = () => {
 };
 
 export async function GET() {
-  const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+  const apiKey = process.env.OPENWEATHER_API_KEY;
   const lat = process.env.NEXT_PUBLIC_WEATHER_LAT;
   const lon = process.env.NEXT_PUBLIC_WEATHER_LON;
 
