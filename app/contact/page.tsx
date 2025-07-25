@@ -449,6 +449,15 @@ export default function ContactPage() {
               Chief Baitinger
             </a>
           </p>
+          <div className="flex justify-center">
+                        <Image
+                          src="/project.png"
+                          alt="theProject Logo"
+                          width={300}
+                          height={100}
+                          className="object-contain"
+                        />
+                      </div> 
         </footer>
       </main>
     </div>

@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Menu, Phone, MapPin } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
+import ThemeToggle from "@/components/theme-toggle" // Corrected import
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { useState } from "react"

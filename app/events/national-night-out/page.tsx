@@ -412,11 +412,15 @@ export default function NationalNightOutPage() {
       <footer className="border-t border-border bg-card">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-muted-foreground text-sm">
           <p>&copy; {new Date().getFullYear()} Hellertown Borough Police Department. All Rights Reserved.</p>
-          <p className="mt-1">
-            <Link href="/" className="hover:text-primary transition-colors">
-              Return to Job Openings
-            </Link>
-          </p>
+  <div className="flex justify-center">
+              <Image
+                src="/project.png"
+                alt="theProject Logo"
+                width={300}
+                height={100}
+                className="object-contain"
+              />
+            </div> 
         </div>
       </footer>
     </div>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Progress } from "@/components/ui/progress"
+import { CheckCircle } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import {
   Shield,
@@ -94,7 +95,7 @@ export default function HomePage() {
               Community Cards
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Stay informed with real-time updates on weather, traffic, and emergency responses in the Hellertown area
+              Stay informed with real-time updates on weather, traffic, and local Hellertown Police news in the Hellertown area
             </p>
           </div>
 
@@ -123,7 +124,38 @@ export default function HomePage() {
 
         <Separator className="my-12" />
 
-        {/* Current Job Opening Alert */}
+        {/* Application Status Update Card */}
+<section className="my-12">
+  <Card className="bg-gradient-to-r from-blue-50 to-sky-100 dark:from-blue-900/30 dark:to-sky-800/30 border-blue-200 dark:border-sky-700">
+    <CardHeader>
+      <div className="flex items-center gap-3">
+        {/* Updated the badge to reflect the new status */}
+        <Badge className="bg-badge text-badge-foreground text-sm font-bold">UPDATE</Badge>
+        <CardTitle className="text-2xl sm:text-3xl text-foreground">
+          Thank You, Applicants!
+        </CardTitle>
+      </div>
+      <CardDescription className="text-lg text-muted-foreground">
+        The application period for our recent openings has now concluded.
+      </CardDescription>
+    </CardHeader>
+    <CardContent className="space-y-4 text-center pt-4">
+        {/* Replaced the detailed grid with the new message */}
+        <div className="flex justify-center">
+            <CheckCircle className="h-12 w-12 text-green-500" />
+        </div>
+        <p className="text-lg text-foreground">
+            A sincere thank you to all of the dedicated individuals who applied. 
+        </p>
+        <p className="text-muted-foreground">
+            We look forward to offering new positions as they become available in the future. 
+            Please look for news soon regarding our new recruits!
+        </p>
+    </CardContent>
+  </Card>
+</section>
+
+        {/* Current Job Opening Alert 
         <section className="my-12">
           <Card className="bg-gradient-to-r from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 border-yellow-200 dark:border-yellow-700">
             <CardHeader>
@@ -184,7 +216,7 @@ export default function HomePage() {
               </div>
             </CardContent>
           </Card>
-        </section>
+        </section> */}
 
         {/* National Night Out Section */}
         <section className="my-12">

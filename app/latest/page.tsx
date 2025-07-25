@@ -30,7 +30,7 @@ const blogPosts = [
     date: "2025-01-15",
     readTime: "3 min read",
     category: "Community Safety",
-    image: "/placeholder.svg?height=200&width=400",
+    image: "/community.png?height=200&width=400",
     views: 245,
     likes: 18,
   },
@@ -44,7 +44,7 @@ const blogPosts = [
     date: "2025-01-12",
     readTime: "2 min read",
     category: "Training",
-    image: "/placeholder.svg?height=200&width=400",
+    image: "/arrest1.png?height=200&width=400",
     views: 189,
     likes: 12,
   },
@@ -58,7 +58,7 @@ const blogPosts = [
     date: "2025-01-10",
     readTime: "4 min read",
     category: "Safety Tips",
-    image: "/placeholder.svg?height=200&width=400",
+    image: "/family.png?height=200&width=400",
     views: 312,
     likes: 24,
   },
@@ -134,14 +134,12 @@ export default function LatestPage() {
                 Chief's Message: Strengthening Community Partnerships
               </CardTitle>
               <CardDescription className="text-lg text-muted-foreground">
-                A message from Chief Baitinger about our ongoing commitment to community policing
+                A message from Chief Baitinger about our ongoing commitment to our community, informing and the art of policing.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                "As we continue to serve the Hellertown community, our focus remains on building strong partnerships
-                with residents, businesses, and community organizations. Together, we can create a safer, more connected
-                neighborhood for everyone."
+                "I look forward to using our blog to discuss some of the great things HPD is doing and share them directly with the community. This open communication is key to our partnership with residents and businesses as we work together to create a safer, more connected neighborhood.  Our blog is coming soon enough, thank you for your support!"
               </p>
               <div className="flex items-center gap-4">
                 <Avatar className="h-12 w-12">
@@ -184,7 +182,7 @@ export default function LatestPage() {
                     className="object-cover group-hover:scale-105 transition-transform duration-200"
                   />
                   <div className="absolute top-3 left-3">
-                    <Badge variant="secondary" className="bg-white/90 text-foreground">
+                    <Badge variant="secondary" className="bg-white/30 text-foreground">
                       {post.category}
                     </Badge>
                   </div>

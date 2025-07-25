@@ -309,7 +309,7 @@ export function WeatherWidget() {
         <div>
           <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
             <Thermometer className="h-4 w-4 text-orange-500" />
-            3-Day Forecast
+            Your 6-Day Hellertown Forecast
           </h4>
           <div className="space-y-2">
             {forecast.map((day, index) => (
@@ -424,16 +424,48 @@ export function WeatherWidget() {
             <Image
               src="/panther.png"
               alt="Saucon Valley Panther Mascot"
-              width={60}
-              height={60}
+              width={200}
+              height={200}
               className="object-contain"
             />
           </div>
+           <Separator className="my-2" />
           <p className="font-bold text-foreground">School Starts August 25th!</p>
-          <p className="text-xs text-muted-foreground italic">
+          <p className="font-bold text-foreground">Start planning now, check your schedules</p>
+           <Separator className="my-2" />
+          <p className="text-xl text-pink-700 font-bold">
             Local weather sponsored by the Saucon Valley Cheerleaders
           </p>
-        </div>
+           <Separator className="my-8" />
+          <br></br>
+        <p className="font-bold text-foreground">Site publically maintained by theProject</p>
+          <div className="flex justify-center">
+            <Image
+              src="/project.png"
+              alt="theProject Logo"
+              width={300}
+              height={100}
+              className="object-contain"
+            />
+          </div>
+         <Separator className="my-4" />
+  <div className="text-sm">
+    <a 
+      href="https://bytheproject.com" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="text-blue-500 hover:underline"
+    >
+      Visit theProject
+    </a>
+    <p className="mt-2">
+      Contact the <a href="mailto:tjsmith@bytheproject.com" className="text-blue-500 hover:underline">Admin - Tristan Smith</a>
+    </p>
+  </div>
+  {/* --- END OF ADDITIONS --- */}
+
+</div>
+        
         {/* --- NEW SECTION ENDS HERE --- */}
         
       </CardContent>
