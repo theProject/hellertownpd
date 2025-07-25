@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image" // Import the Next.js Image component
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
@@ -415,6 +416,26 @@ export function WeatherWidget() {
         <div className="text-xs text-muted-foreground text-center pt-2 border-t border-border">
           📍 Hellertown, PA 18055 • Updated {new Date().toLocaleTimeString()}
         </div>
+
+        {/* --- NEW SECTION STARTS HERE --- */}
+        <Separator className="my-2" />
+        <div className="text-center space-y-2">
+          <div className="flex justify-center">
+            <Image
+              src="/panther.png"
+              alt="Saucon Valley Panther Mascot"
+              width={60}
+              height={60}
+              className="object-contain"
+            />
+          </div>
+          <p className="font-bold text-foreground">School Starts August 25th!</p>
+          <p className="text-xs text-muted-foreground italic">
+            Local weather sponsored by the Saucon Valley Cheerleaders
+          </p>
+        </div>
+        {/* --- NEW SECTION ENDS HERE --- */}
+        
       </CardContent>
     </Card>
   )

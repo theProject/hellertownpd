@@ -32,7 +32,7 @@ import {
 } from "lucide-react"
 import { WeatherWidget } from "@/components/weather-widget"
 import { TrafficWidget } from "@/components/traffic-widget"
-import { EmergencyResponseWidget } from "@/components/emergency-response-widget"
+import { LocalPoliceNewsWidget } from "@/components/LocalPoliceNewsWidget"
 
 const communityReviews = [
   {
@@ -102,7 +102,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8 max-w-6xl mx-auto">
             <WeatherWidget />
             <TrafficWidget />
-            <EmergencyResponseWidget />
+            <LocalPoliceNewsWidget />
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
