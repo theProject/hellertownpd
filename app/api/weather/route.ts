@@ -1,3 +1,4 @@
+
 import { NextResponse } from "next/server"
 
 export async function GET() {
@@ -21,7 +22,7 @@ export async function GET() {
   }
 
   // Prefer One Call 3.0 (paid) but fallback to free-tier endpoints
-  const oneCallUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${apiKey}&units=imperial`
+  const oneCallUrl = `http://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${apiKey}&units=imperial`
 
   try {
     const oneCallRes = await fetch(oneCallUrl)
@@ -40,10 +41,10 @@ export async function GET() {
     console.warn(`One Call 3.0 failed (${oneCallRes.status}), falling back to free-tier.`)
 
     const currentRes = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
+      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
     )
     const forecastRes = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
+      `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
     )
 
     const currentData = currentRes.ok ? await currentRes.json() : null
