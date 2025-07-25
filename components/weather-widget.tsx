@@ -23,7 +23,6 @@ import {
   TrendingDown,
 } from "lucide-react"
 
-// Interfaces
 interface WeatherData {
   temperature: number
   condition: string
@@ -57,7 +56,7 @@ interface HistoricalWeather {
   year: number
 }
 
-// Helpers for weather icons
+// Weather icon helpers
 const getWeatherIcon = (condition: string, size = "h-8 w-8") => {
   const lowerCondition = condition.toLowerCase()
   if (lowerCondition.includes("rain") || lowerCondition.includes("drizzle")) {
@@ -79,7 +78,7 @@ const getSmallWeatherIcon = (condition: string) => {
   return <Sun className="h-4 w-4 text-yellow-500" />
 }
 
-// Seasonal alerts logic
+// Seasonal alerts
 const getCurrentSeason = () => {
   const month = new Date().getMonth() + 1
   if (month >= 3 && month <= 5) return "spring"
@@ -149,7 +148,6 @@ export function WeatherWidget() {
           throw new Error(data.error || "Weather API unavailable")
         }
 
-        // Safely extract current weather
         const temp = data.current?.temp ?? 0
         const feels = data.current?.feels_like ?? 0
         const condition = data.current?.weather?.[0]?.main ?? "Clear"
@@ -167,7 +165,6 @@ export function WeatherWidget() {
         }
         setWeather(currentWeatherData)
 
-        // Forecast (safe mapping)
         const forecastData: ForecastDay[] = Array.isArray(data.forecast)
           ? data.forecast.map((day: any, index: number) => ({
               day: index === 0 ? "Today" : new Date(day.dt * 1000).toLocaleDateString("en-US", { weekday: "long" }),
@@ -179,18 +176,18 @@ export function WeatherWidget() {
           : []
         setForecast(forecastData)
 
-        // Historical (optional)
         if (data.historical) {
           setHistorical({
             temperature: Math.round(data.historical?.temp ?? 0),
             condition: data.historical?.weather?.[0]?.main ?? "Clear",
             high: Math.round((data.historical?.temp ?? 0) + 5),
             low: Math.round((data.historical?.temp ?? 0) - 5),
-            year: data.historical?.dt ? new Date(data.historical.dt * 1000).getFullYear() : new Date().getFullYear(),
+            year: data.historical?.dt
+              ? new Date(data.historical.dt * 1000).getFullYear()
+              : new Date().getFullYear(),
           })
         }
 
-        // Alerts (safe fallback)
         const apiAlerts: WeatherAlert[] = Array.isArray(data.alerts)
           ? data.alerts.map((alert: any) => ({
               type: alert.event ?? "Alert",
@@ -214,7 +211,6 @@ export function WeatherWidget() {
     return () => clearInterval(interval)
   }, [])
 
-  // Loading card
   if (loading) {
     return (
       <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-700">
@@ -235,7 +231,6 @@ export function WeatherWidget() {
     )
   }
 
-  // Error card
   if (error || !weather) {
     return (
       <Card className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/20 dark:to-gray-800/20 border-gray-200 dark:border-gray-700">
@@ -254,7 +249,6 @@ export function WeatherWidget() {
 
   const tempDifference = historical ? weather.temperature - historical.temperature : 0
 
-  // Main card
   return (
     <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md transition-shadow">
       <CardHeader className="pb-3">
@@ -334,7 +328,7 @@ export function WeatherWidget() {
           </div>
         </div>
 
-        {/* Historical Comparison */}
+        {/* Historical */}
         {historical && (
           <>
             <Separator className="my-4" />
@@ -382,7 +376,7 @@ export function WeatherWidget() {
           </>
         )}
 
-        {/* Weather Alerts */}
+        {/* Alerts */}
         {alerts.length > 0 && (
           <>
             <Separator className="my-4" />
@@ -412,11 +406,12 @@ export function WeatherWidget() {
           </>
         )}
 
-        {/* Footer Info & Sponsor */}
+        {/* Footer */}
         <div className="text-xs text-muted-foreground text-center pt-2 border-t border-border">
           📍 Hellertown, PA 18055 • Updated {new Date().toLocaleTimeString()}
         </div>
 
+        {/* Sponsored Section */}
         <Separator className="my-2" />
         <div className="text-center space-y-2">
           <div className="flex justify-center">
@@ -447,4 +442,27 @@ export function WeatherWidget() {
             />
           </div>
           <Separator className="my-4" />
-          <div className
+          <div className="text-sm">
+            <a
+              href="https://bytheproject"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              Visit theProject
+            </a>
+            <p className="mt-2">
+              Contact the{" "}
+              <a
+                href="mailto:tjsmith@bytheproject.com"
+                className="text-blue-500 hover:underline"
+              >
+                Admin - Tristan Smith
+              </a>
+            </p>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
