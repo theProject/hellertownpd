@@ -56,29 +56,23 @@ interface HistoricalWeather {
   year: number
 }
 
-// Weather icon helpers
+// --- Helpers ---
 const getWeatherIcon = (condition: string, size = "h-8 w-8") => {
-  const lowerCondition = condition.toLowerCase()
-  if (lowerCondition.includes("rain") || lowerCondition.includes("drizzle")) {
-    return <CloudRain className={`${size} text-blue-500`} />
-  } else if (lowerCondition.includes("snow")) {
-    return <CloudSnow className={`${size} text-blue-200`} />
-  } else if (lowerCondition.includes("clouds")) {
-    return <Cloud className={`${size} text-gray-500`} />
-  } else {
-    return <Sun className={`${size} text-yellow-500`} />
-  }
+  const c = condition.toLowerCase()
+  if (c.includes("rain") || c.includes("drizzle")) return <CloudRain className={`${size} text-blue-500`} />
+  if (c.includes("snow")) return <CloudSnow className={`${size} text-blue-200`} />
+  if (c.includes("clouds")) return <Cloud className={`${size} text-gray-500`} />
+  return <Sun className={`${size} text-yellow-500`} />
 }
 
 const getSmallWeatherIcon = (condition: string) => {
-  const lowerCondition = condition.toLowerCase()
-  if (lowerCondition.includes("rain")) return <CloudRain className="h-4 w-4 text-blue-500" />
-  if (lowerCondition.includes("snow")) return <Snowflake className="h-4 w-4 text-blue-200" />
-  if (lowerCondition.includes("clouds")) return <Cloud className="h-4 w-4 text-gray-500" />
+  const c = condition.toLowerCase()
+  if (c.includes("rain")) return <CloudRain className="h-4 w-4 text-blue-500" />
+  if (c.includes("snow")) return <Snowflake className="h-4 w-4 text-blue-200" />
+  if (c.includes("clouds")) return <Cloud className="h-4 w-4 text-gray-500" />
   return <Sun className="h-4 w-4 text-yellow-500" />
 }
 
-// Seasonal alerts
 const getCurrentSeason = () => {
   const month = new Date().getMonth() + 1
   if (month >= 3 && month <= 5) return "spring"
@@ -130,6 +124,7 @@ const getSeasonalAlerts = (weather: WeatherData, season: string): WeatherAlert[]
   return alerts
 }
 
+// --- Component ---
 export function WeatherWidget() {
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [forecast, setForecast] = useState<ForecastDay[]>([])
@@ -148,12 +143,13 @@ export function WeatherWidget() {
           throw new Error(data.error || "Weather API unavailable")
         }
 
+        // Safely extract current weather
         const temp = data.current?.temp ?? 0
         const feels = data.current?.feels_like ?? 0
         const condition = data.current?.weather?.[0]?.main ?? "Clear"
         const desc = data.current?.weather?.[0]?.description ?? "No description"
 
-        const currentWeatherData: WeatherData = {
+        const currentWeather: WeatherData = {
           temperature: Math.round(temp),
           feelsLike: Math.round(feels),
           condition,
@@ -163,19 +159,21 @@ export function WeatherWidget() {
           visibility: data.current?.visibility ? Math.round(data.current.visibility / 1609) : 0,
           pressure: data.current?.pressure ? data.current.pressure * 0.02953 : 0,
         }
-        setWeather(currentWeatherData)
+        setWeather(currentWeather)
 
-        const forecastData: ForecastDay[] = Array.isArray(data.forecast)
-          ? data.forecast.map((day: any, index: number) => ({
-              day: index === 0 ? "Today" : new Date(day.dt * 1000).toLocaleDateString("en-US", { weekday: "long" }),
+        // Forecast
+        const forecastList: ForecastDay[] = Array.isArray(data.forecast)
+          ? data.forecast.map((day: any, idx: number) => ({
+              day: day.day || (idx === 0 ? "Today" : new Date(day.dt * 1000).toLocaleDateString("en-US", { weekday: "long" })),
               high: Math.round(day.temp?.max ?? 0),
               low: Math.round(day.temp?.min ?? 0),
               condition: day.weather?.[0]?.main ?? "Clear",
               precipitation: Math.round((day.pop ?? 0) * 100),
             }))
           : []
-        setForecast(forecastData)
+        setForecast(forecastList)
 
+        // Historical placeholder (if present)
         if (data.historical) {
           setHistorical({
             temperature: Math.round(data.historical?.temp ?? 0),
@@ -188,17 +186,17 @@ export function WeatherWidget() {
           })
         }
 
+        // Alerts
         const apiAlerts: WeatherAlert[] = Array.isArray(data.alerts)
-          ? data.alerts.map((alert: any) => ({
-              type: alert.event ?? "Alert",
-              message: alert.description ?? "Stay safe.",
+          ? data.alerts.map((a: any) => ({
+              type: a.event ?? "Alert",
+              message: a.description ?? "Stay safe.",
               severity: "high",
             }))
           : []
 
         const season = getCurrentSeason()
-        const seasonalAlerts = getSeasonalAlerts(currentWeatherData, season)
-        setAlerts([...apiAlerts, ...seasonalAlerts])
+        setAlerts([...apiAlerts, ...getSeasonalAlerts(currentWeather, season)])
       } catch (err: any) {
         setError(err.message || "Unable to fetch weather data")
       } finally {
@@ -211,6 +209,7 @@ export function WeatherWidget() {
     return () => clearInterval(interval)
   }, [])
 
+  // Loading card
   if (loading) {
     return (
       <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-700">
@@ -231,6 +230,7 @@ export function WeatherWidget() {
     )
   }
 
+  // Error card
   if (error || !weather) {
     return (
       <Card className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/20 dark:to-gray-800/20 border-gray-200 dark:border-gray-700">
@@ -247,8 +247,9 @@ export function WeatherWidget() {
     )
   }
 
-  const tempDifference = historical ? weather.temperature - historical.temperature : 0
+  const tempDiff = historical ? weather.temperature - historical.temperature : 0
 
+  // Main card
   return (
     <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md transition-shadow">
       <CardHeader className="pb-3">
@@ -306,8 +307,8 @@ export function WeatherWidget() {
             Your 6-Day Hellertown Forecast
           </h4>
           <div className="space-y-2">
-            {forecast.map((day, index) => (
-              <div key={index} className="flex items-center justify-between text-xs">
+            {forecast.map((day, idx) => (
+              <div key={idx} className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2 flex-1">
                   {getSmallWeatherIcon(day.condition)}
                   <span className="font-medium text-foreground min-w-[60px]">{day.day}</span>
@@ -352,22 +353,22 @@ export function WeatherWidget() {
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">Temperature comparison:</span>
                   <div className="flex items-center gap-1">
-                    {tempDifference > 0 ? (
+                    {tempDiff > 0 ? (
                       <TrendingUp className="h-3 w-3 text-red-500" />
-                    ) : tempDifference < 0 ? (
+                    ) : tempDiff < 0 ? (
                       <TrendingDown className="h-3 w-3 text-blue-500" />
                     ) : null}
                     <span
                       className={`font-medium ${
-                        tempDifference > 0
+                        tempDiff > 0
                           ? "text-red-600"
-                          : tempDifference < 0
+                          : tempDiff < 0
                             ? "text-blue-600"
                             : "text-muted-foreground"
                       }`}
                     >
-                      {tempDifference > 0 ? "+" : ""}
-                      {tempDifference}° vs five years ago
+                      {tempDiff > 0 ? "+" : ""}
+                      {tempDiff}° vs five years ago
                     </span>
                   </div>
                 </div>
@@ -386,19 +387,19 @@ export function WeatherWidget() {
                 Alerts & Advisories
               </h4>
               <div className="space-y-2">
-                {alerts.map((alert, index) => (
+                {alerts.map((a, i) => (
                   <div
-                    key={index}
+                    key={i}
                     className={`p-2 rounded-md text-xs ${
-                      alert.severity === "high"
+                      a.severity === "high"
                         ? "bg-red-100 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
-                        : alert.severity === "medium"
+                        : a.severity === "medium"
                           ? "bg-amber-100 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800"
                           : "bg-blue-100 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800"
                     }`}
                   >
-                    <div className="font-medium text-foreground mb-1">{alert.type}</div>
-                    <p className="text-muted-foreground leading-relaxed">{alert.message}</p>
+                    <div className="font-medium text-foreground mb-1">{a.type}</div>
+                    <p className="text-muted-foreground leading-relaxed">{a.message}</p>
                   </div>
                 ))}
               </div>
@@ -406,12 +407,10 @@ export function WeatherWidget() {
           </>
         )}
 
-        {/* Footer */}
+        {/* Footer & Sponsorship */}
         <div className="text-xs text-muted-foreground text-center pt-2 border-t border-border">
           📍 Hellertown, PA 18055 • Updated {new Date().toLocaleTimeString()}
         </div>
-
-        {/* Sponsored Section */}
         <Separator className="my-2" />
         <div className="text-center space-y-2">
           <div className="flex justify-center">
@@ -444,9 +443,9 @@ export function WeatherWidget() {
           <Separator className="my-4" />
           <div className="text-sm">
             <a
-              href="https://bytheproject"
+              href="https://bytheproject.com"
               target="_blank"
-              rel="noopener noreferrer"
+             rel="noopener noreferrer"
               className="text-blue-500 hover:underline"
             >
               Visit theProject
