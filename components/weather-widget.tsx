@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image" // Import the Next.js Image component
+import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
@@ -23,7 +23,7 @@ import {
   TrendingDown,
 } from "lucide-react"
 
-// Interfaces to structure the final, processed data for the component
+// Interfaces
 interface WeatherData {
   temperature: number
   condition: string
@@ -51,12 +51,13 @@ interface WeatherAlert {
 
 interface HistoricalWeather {
   temperature: number
-  condition:string
+  condition: string
   high: number
   low: number
   year: number
 }
 
+// Helpers for weather icons
 const getWeatherIcon = (condition: string, size = "h-8 w-8") => {
   const lowerCondition = condition.toLowerCase()
   if (lowerCondition.includes("rain") || lowerCondition.includes("drizzle")) {
@@ -78,9 +79,9 @@ const getSmallWeatherIcon = (condition: string) => {
   return <Sun className="h-4 w-4 text-yellow-500" />
 }
 
-// Your custom seasonal alert logic remains, now driven by real data!
+// Seasonal alerts logic
 const getCurrentSeason = () => {
-  const month = new Date().getMonth() + 1 // 1-12
+  const month = new Date().getMonth() + 1
   if (month >= 3 && month <= 5) return "spring"
   if (month >= 6 && month <= 8) return "summer"
   if (month >= 9 && month <= 11) return "fall"
@@ -89,7 +90,6 @@ const getCurrentSeason = () => {
 
 const getSeasonalAlerts = (weather: WeatherData, season: string): WeatherAlert[] => {
   const alerts: WeatherAlert[] = []
-
   switch (season) {
     case "summer":
       if (weather.temperature > 85) {
@@ -131,7 +131,6 @@ const getSeasonalAlerts = (weather: WeatherData, season: string): WeatherAlert[]
   return alerts
 }
 
-
 export function WeatherWidget() {
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [forecast, setForecast] = useState<ForecastDay[]>([])
@@ -144,65 +143,65 @@ export function WeatherWidget() {
     const fetchWeather = async () => {
       try {
         const res = await fetch("/api/weather")
-        if (!res.ok) {
-          throw new Error("Failed to fetch weather data from server")
-        }
         const data = await res.json()
 
-        // --- Map API data to component state ---
+        if (!res.ok || !data.current) {
+          throw new Error(data.error || "Weather API unavailable")
+        }
 
-        // 1. Current Weather
+        // Safely extract current weather
+        const temp = data.current?.temp ?? 0
+        const feels = data.current?.feels_like ?? 0
+        const condition = data.current?.weather?.[0]?.main ?? "Clear"
+        const desc = data.current?.weather?.[0]?.description ?? "No description"
+
         const currentWeatherData: WeatherData = {
-          temperature: Math.round(data.current.temp),
-          feelsLike: Math.round(data.current.feels_like),
-          condition: data.current.weather[0]?.main || "Clear",
-          description: data.current.weather[0]?.description || "No description",
-          humidity: data.current.humidity,
-          windSpeed: Math.round(data.current.wind_speed),
-          visibility: Math.round(data.current.visibility / 1609), // meters to miles
-          pressure: data.current.pressure * 0.02953, // hPa to inHg
+          temperature: Math.round(temp),
+          feelsLike: Math.round(feels),
+          condition,
+          description: desc,
+          humidity: data.current?.humidity ?? 0,
+          windSpeed: Math.round(data.current?.wind_speed ?? 0),
+          visibility: data.current?.visibility ? Math.round(data.current.visibility / 1609) : 0,
+          pressure: data.current?.pressure ? data.current.pressure * 0.02953 : 0,
         }
         setWeather(currentWeatherData)
 
-        // 2. Forecast
-        const forecastData: ForecastDay[] = data.forecast.map((day: any, index: number) => ({
-          day:
-            index === 0
-              ? "Today"
-              : new Date(day.dt * 1000).toLocaleDateString("en-US", { weekday: "long" }),
-          high: Math.round(day.temp.max),
-          low: Math.round(day.temp.min),
-          condition: day.weather[0]?.main || "Clear",
-          precipitation: Math.round(day.pop * 100), // probability of precipitation
-        }))
+        // Forecast (safe mapping)
+        const forecastData: ForecastDay[] = Array.isArray(data.forecast)
+          ? data.forecast.map((day: any, index: number) => ({
+              day: index === 0 ? "Today" : new Date(day.dt * 1000).toLocaleDateString("en-US", { weekday: "long" }),
+              high: Math.round(day.temp?.max ?? 0),
+              low: Math.round(day.temp?.min ?? 0),
+              condition: day.weather?.[0]?.main ?? "Clear",
+              precipitation: Math.round((day.pop ?? 0) * 100),
+            }))
+          : []
         setForecast(forecastData)
 
-        // 3. Historical Weather
+        // Historical (optional)
         if (data.historical) {
-            const historicalWeather: HistoricalWeather = {
-                temperature: Math.round(data.historical.temp),
-                condition: data.historical.weather[0]?.main || "Clear",
-                // Note: Historical API doesn't provide anything past 1/2/24 - going 5 years back
-              
-                high: Math.round(data.historical.temp) + 5, // Placeholder logic
-                low: Math.round(data.historical.temp) - 5,  // Placeholder logic
-                year: new Date(data.historical.dt * 1000).getFullYear(),
-            }
-            setHistorical(historicalWeather)
+          setHistorical({
+            temperature: Math.round(data.historical?.temp ?? 0),
+            condition: data.historical?.weather?.[0]?.main ?? "Clear",
+            high: Math.round((data.historical?.temp ?? 0) + 5),
+            low: Math.round((data.historical?.temp ?? 0) - 5),
+            year: data.historical?.dt ? new Date(data.historical.dt * 1000).getFullYear() : new Date().getFullYear(),
+          })
         }
 
-        // 4. Alerts (API alerts + custom seasonal alerts)
-        const apiAlerts: WeatherAlert[] = (data.alerts || []).map((alert: any) => ({
-          type: alert.event,
-          message: alert.description,
-          severity: "high", // OpenWeatherMap alerts are usually significant
-        }));
+        // Alerts (safe fallback)
+        const apiAlerts: WeatherAlert[] = Array.isArray(data.alerts)
+          ? data.alerts.map((alert: any) => ({
+              type: alert.event ?? "Alert",
+              message: alert.description ?? "Stay safe.",
+              severity: "high",
+            }))
+          : []
 
         const season = getCurrentSeason()
         const seasonalAlerts = getSeasonalAlerts(currentWeatherData, season)
-        
-        setAlerts([...apiAlerts, ...seasonalAlerts]);
-
+        setAlerts([...apiAlerts, ...seasonalAlerts])
       } catch (err: any) {
         setError(err.message || "Unable to fetch weather data")
       } finally {
@@ -211,10 +210,11 @@ export function WeatherWidget() {
     }
 
     fetchWeather()
-    const interval = setInterval(fetchWeather, 30 * 60 * 1000) // Fetch every 30 mins
+    const interval = setInterval(fetchWeather, 30 * 60 * 1000)
     return () => clearInterval(interval)
   }, [])
 
+  // Loading card
   if (loading) {
     return (
       <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-700">
@@ -235,6 +235,7 @@ export function WeatherWidget() {
     )
   }
 
+  // Error card
   if (error || !weather) {
     return (
       <Card className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/20 dark:to-gray-800/20 border-gray-200 dark:border-gray-700">
@@ -253,6 +254,7 @@ export function WeatherWidget() {
 
   const tempDifference = historical ? weather.temperature - historical.temperature : 0
 
+  // Main card
   return (
     <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md transition-shadow">
       <CardHeader className="pb-3">
@@ -261,9 +263,7 @@ export function WeatherWidget() {
             {getWeatherIcon(weather.condition, "h-5 w-5")}
             Hellertown Weather
           </CardTitle>
-          <Badge className="text-xs bg-green-600 text-white">
-            Live
-          </Badge>
+          <Badge className="text-xs bg-green-600 text-white">Live</Badge>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -279,7 +279,7 @@ export function WeatherWidget() {
           </div>
         </div>
 
-        {/* Current Conditions Grid */}
+        {/* Conditions grid */}
         <div className="grid grid-cols-2 gap-3 text-xs">
           <div className="flex items-center gap-2">
             <Droplets className="h-3 w-3 text-blue-500" />
@@ -299,13 +299,13 @@ export function WeatherWidget() {
           <div className="flex items-center gap-2">
             <Gauge className="h-3 w-3 text-purple-500" />
             <span className="text-muted-foreground">Pressure</span>
-            <span className="font-medium ml-auto">{weather.pressure}"</span>
+            <span className="font-medium ml-auto">{weather.pressure.toFixed(2)}"</span>
           </div>
         </div>
 
         <Separator className="my-4" />
 
-        {/* 3-Day Forecast */}
+        {/* Forecast */}
         <div>
           <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
             <Thermometer className="h-4 w-4 text-orange-500" />
@@ -381,7 +381,7 @@ export function WeatherWidget() {
             </div>
           </>
         )}
-        
+
         {/* Weather Alerts */}
         {alerts.length > 0 && (
           <>
@@ -412,12 +412,11 @@ export function WeatherWidget() {
           </>
         )}
 
-        {/* Location & Update Info */}
+        {/* Footer Info & Sponsor */}
         <div className="text-xs text-muted-foreground text-center pt-2 border-t border-border">
           📍 Hellertown, PA 18055 • Updated {new Date().toLocaleTimeString()}
         </div>
 
-        {/* --- NEW SECTION STARTS HERE --- */}
         <Separator className="my-2" />
         <div className="text-center space-y-2">
           <div className="flex justify-center">
@@ -429,16 +428,15 @@ export function WeatherWidget() {
               className="object-contain"
             />
           </div>
-           <Separator className="my-2" />
+          <Separator className="my-2" />
           <p className="font-bold text-foreground">School Starts August 25th!</p>
           <p className="font-bold text-foreground">Start planning now, check your schedules</p>
-           <Separator className="my-2" />
+          <Separator className="my-2" />
           <p className="text-xl text-pink-700 font-bold">
             Local weather sponsored by the Saucon Valley Cheerleaders
           </p>
-           <Separator className="my-8" />
-          <br></br>
-        <p className="font-bold text-foreground">Site publically maintained by theProject</p>
+          <Separator className="my-8" />
+          <p className="font-bold text-foreground">Site publicly maintained by theProject</p>
           <div className="flex justify-center">
             <Image
               src="/project.png"
@@ -448,27 +446,5 @@ export function WeatherWidget() {
               className="object-contain"
             />
           </div>
-         <Separator className="my-4" />
-  <div className="text-sm">
-    <a 
-      href="https://bytheproject.com" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="text-blue-500 hover:underline"
-    >
-      Visit theProject
-    </a>
-    <p className="mt-2">
-      Contact the <a href="mailto:tjsmith@bytheproject.com" className="text-blue-500 hover:underline">Admin - Tristan Smith</a>
-    </p>
-  </div>
-  {/* --- END OF ADDITIONS --- */}
-
-</div>
-        
-        {/* --- NEW SECTION ENDS HERE --- */}
-        
-      </CardContent>
-    </Card>
-  )
-}
+          <Separator className="my-4" />
+          <div className
