@@ -30,7 +30,7 @@ export function TrafficMapModal({
     <div style={{ height }} className="w-full">
       <APIProvider apiKey={apiKey}>
         <Map
-          defaultCenter={center} // Use defaultCenter to allow panning
+          defaultCenter={center} // Use defaultCenter to allow panning for sure
           defaultZoom={zoom}
           gestureHandling={isInteractive ? "greedy" : "none"}
           disableDefaultUI={true}
