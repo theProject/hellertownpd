@@ -26,10 +26,17 @@ export const metadata = {
     siteName: "Hellertown Borough Police Department",
     images: [
       {
-        url: "https://hellertownpolice.org/api/og/", // 🔥 Now uses your dynamic route!
+        url: "https://hellertownpolice.org/images/hellertownstandard.png",
         width: 1200,
         height: 630,
-        alt: "Hellertown Police Department - Dynamic image based on time of day",
+        alt: "Hellertown Borough Police Department - Community • Safety • Service",
+        type: "image/png",
+      },
+      {
+        url: "https://hellertownpolice.org/images/halloweenhpd.png",
+        width: 1200,
+        height: 630,
+        alt: "Hellertown Police - Halloween Patrol & Safety Tips",
         type: "image/png",
       },
     ],
@@ -41,8 +48,11 @@ export const metadata = {
     title: "Hellertown Borough Police Department - Serving Our Community Since 1872",
     description:
       "Official website of the Hellertown Borough Police Department. Now hiring 3 Full-Time Entry-Level Police Officers.",
-    images: ["https://hellertownpolice.org/api/og/"], // 🔥 Dynamic for Twitter too!
-    creator: "@hellertownpd",
+    images: [
+      "https://hellertownpolice.org/images/hellertownstandard.png",
+      "https://hellertownpolice.org/images/halloweenhpd.png",
+    ],
+    creator: "@theProjectDev",
     site: "@hellertownpd",
   },
   alternates: {
@@ -52,7 +62,7 @@ export const metadata = {
     "msapplication-TileColor": "#1e3a8a",
     "theme-color": "#1e3a8a",
   },
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -102,7 +112,7 @@ export default function RootLayout({
               alternateName: "Hellertown Police",
               url: "https://hellertownpolice.org",
               logo: "https://hellertownpolice.org/images/hellertown-badge.svg",
-              image: "https://hellertownpolice.org/api/og/", // 🔥 Dynamic image in schema too!
+              image: "https://hellertownpolice.org/images/hellertownstandard.png",
               description:
                 "Official website of the Hellertown Borough Police Department serving Northampton County, Pennsylvania since 1872.",
               address: {
