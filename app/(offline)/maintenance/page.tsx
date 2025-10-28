@@ -20,11 +20,15 @@ export default function MaintenancePage() {
 
         {/* Main explainer */}
         <p className="text-sm text-white/70 leading-relaxed mb-6">
-          This domain (hellertownpolice.org and all
-          sub-domainsis privately owned and operated by theProject,
-          a local and independent development studio. It is not an official
-          website of the Borough or any police department, and it does not
-          represent current policy, guidance, or emergency information.
+          This domain (hellertownpolice.org and all associated 
+          sub-domains are privately owned and operated by theProject,
+          a local and independent development studio. While
+          we retain our rights to use our domains as we please, we need to be clear that
+          this is not an official, legally-mandated, contracted or operated property of the 
+          Hellertown Borough or any local police department effective immediately. Nor
+          was it sanctioned in the past by a borough entity - finally it does not
+          represent current policy, guidance, or emergency information, nor any opinion
+          or guidance from a governing body. Opinions are only of the donor as follows:
           <br />
           <br />
           The content that previously appeared here was created,
