@@ -24,7 +24,15 @@ export default function MaintenancePage() {
           This domain is privately owned and operated by theProject, an
           independent design and technology studio. It is not an official
           website of the Borough or any police department, and it does not
-          represent current policy, guidance, or emergency information.
+          represent current policy, guidance, or emergency information. We
+          absolutely loved offering it those who visited daily, or landed 
+          using a search engine - if you do find value in having this site -
+          please be sure to give voice to your borough officials, as a donated
+          information site with zero ads - Ever - cost taxpayers nothing. Question
+          is - what are we paying for instead? Ensure to vote friends!
+   
+          
+          
           <br />
           <br />
           The content that previously appeared here was created,
