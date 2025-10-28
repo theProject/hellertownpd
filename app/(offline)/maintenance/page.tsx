@@ -27,7 +27,18 @@ export default function MaintenancePage() {
           <br />
           <br />
           The content that previously appeared here was created,
-          maintained, and hosted as a community service at no cost.
+          maintained, and hosted with love as a community service at no cost.
+          No ads. Daily traffic was around 75-100
+          visitors daily - with majority coming from
+          Google - which shows a need for our small town.
+          We appreciate your visits, and ask you voice
+          your support during borough meetings and demand transparency as to what
+          sort of web presence fhe community pays for - and who updates it?
+          The community should have a presence and fair use of comminity information
+          that isn't 100% based on social media. Ask why a community donated site
+          shouldn't operate - but an outside webmill deserves your tax-dollar.
+          
+
           <br />
           <br />
           The Borough has since chosen to move its public-facing
