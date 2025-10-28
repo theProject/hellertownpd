@@ -73,47 +73,70 @@ export default function HomePage() {
     <div className="min-h-screen bg-background text-foreground">
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
-        <section className="text-center my-8 sm:my-12">
-          <div className="flex justify-center mb-6">
-            <Image
-              src="/images/hellertown-badge.svg"
-              alt="Hellertown Police Department Badge"
-              width={120}
-              height={120}
-              className="h-24 w-24 sm:h-32 sm:w-32"
-            />
+        <section className="text-center my-8 sm:my-16 animate-fade-in">
+          <div className="flex justify-center mb-8 relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-blue-500/20 to-indigo-600/20 blur-3xl -z-10 rounded-full" />
+            <div className="relative p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-950/30 dark:to-indigo-900/30 shadow-soft-lg hover:shadow-glow transition-all duration-500 hover:scale-105 group">
+              <Image
+                src="/images/hellertown-badge.svg"
+                alt="Hellertown Police Department Badge"
+                width={120}
+                height={120}
+                className="h-24 w-24 sm:h-32 sm:w-32 group-hover:rotate-6 transition-transform duration-500"
+              />
+            </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4 tracking-tight">
-            Hellertown Police Department
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-6 tracking-tight">
+            <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
+              Hellertown Police Department
+            </span>
           </h1>
-          <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Serving our community with integrity, dedication, and professionalism since 1872
+          <p className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground mb-12 max-w-4xl mx-auto font-medium leading-relaxed">
+            Serving our community with <span className="text-primary font-bold">integrity</span>, <span className="text-primary font-bold">dedication</span>, and <span className="text-primary font-bold">professionalism</span> since 1872
           </p>
-          <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3 flex items-center justify-center gap-3">
-              <Activity className="h-8 w-8 text-primary" />
-              Community Cards
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+
+          <div className="text-center mb-12 animate-scale-in">
+            <div className="inline-flex items-center justify-center gap-3 mb-4 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20">
+              <Activity className="h-6 w-6 text-primary animate-pulse-soft" />
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
+                Community Cards
+              </h2>
+            </div>
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Stay informed with real-time updates on weather, traffic, and local Hellertown Police news in the Hellertown area
             </p>
           </div>
 
           {/* Community Information Widgets */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8 max-w-6xl mx-auto">
-            <WeatherWidget />
-            <TrafficWidget />
-            <LocalPoliceNewsWidget />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12 max-w-7xl mx-auto">
+            <div className="animate-slide-in-left">
+              <WeatherWidget />
+            </div>
+            <div className="animate-scale-in" style={{ animationDelay: '0.1s' }}>
+              <TrafficWidget />
+            </div>
+            <div className="animate-slide-in-right" style={{ animationDelay: '0.2s' }}>
+              <LocalPoliceNewsWidget />
+            </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            <Button
+              asChild
+              size="lg"
+              className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 shadow-soft hover:shadow-soft-lg text-white font-semibold transform hover:scale-105 transition-all duration-300"
+            >
               <Link href="/jobs">
                 <Shield className="mr-2 h-5 w-5" />
                 Join Our Team
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-2 border-primary hover:bg-primary hover:text-primary-foreground font-semibold transform hover:scale-105 transition-all duration-300 shadow-soft hover:shadow-soft-lg"
+            >
               <Link href="/contact">
                 <Phone className="mr-2 h-5 w-5" />
                 Contact Us
@@ -125,30 +148,31 @@ export default function HomePage() {
         <Separator className="my-12" />
 
         {/* Application Status Update Card */}
-<section className="my-12">
-  <Card className="bg-gradient-to-r from-blue-50 to-sky-100 dark:from-blue-900/30 dark:to-sky-800/30 border-blue-200 dark:border-sky-700">
-    <CardHeader>
+<section className="my-16 animate-fade-in">
+  <Card className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-sky-50 to-indigo-100 dark:from-blue-950/40 dark:to-indigo-900/40 border-blue-200/50 dark:border-sky-700/50 shadow-soft-lg hover:shadow-glow transition-all duration-500">
+    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-400/10 to-indigo-400/10 rounded-full blur-3xl" />
+    <CardHeader className="relative z-10">
       <div className="flex items-center gap-3">
-        {/* Updated the badge to reflect the new status */}
-        <Badge className="bg-badge text-badge-foreground text-sm font-bold">UPDATE</Badge>
-        <CardTitle className="text-2xl sm:text-3xl text-foreground">
+        <Badge className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 text-sm font-bold shadow-soft px-3 py-1">UPDATE</Badge>
+        <CardTitle className="text-2xl sm:text-3xl lg:text-4xl text-foreground font-bold">
           Thank You, Applicants!
         </CardTitle>
       </div>
-      <CardDescription className="text-lg text-muted-foreground">
+      <CardDescription className="text-lg sm:text-xl text-muted-foreground mt-2">
         The application period for our recent openings has now concluded.
       </CardDescription>
     </CardHeader>
-    <CardContent className="space-y-4 text-center pt-4">
-        {/* Replaced the detailed grid with the new message */}
+    <CardContent className="space-y-6 text-center pt-6 relative z-10">
         <div className="flex justify-center">
-            <CheckCircle className="h-12 w-12 text-green-500" />
+            <div className="p-4 rounded-2xl bg-green-100 dark:bg-green-900/30">
+              <CheckCircle className="h-16 w-16 text-green-600 dark:text-green-400" />
+            </div>
         </div>
-        <p className="text-lg text-foreground">
-            A sincere thank you to all of the dedicated individuals who applied. 
+        <p className="text-lg sm:text-xl text-foreground font-semibold">
+            A sincere thank you to all of the dedicated individuals who applied.
         </p>
-        <p className="text-muted-foreground">
-            We look forward to offering new positions as they become available in the future. 
+        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+            We look forward to offering new positions as they become available in the future.
             Please look for news soon regarding our new recruits!
         </p>
     </CardContent>
@@ -219,49 +243,57 @@ export default function HomePage() {
         </section> */}
 
         {/* National Night Out Section */}
-        <section className="my-12">
-          <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-blue-200 dark:border-blue-700">
-            <CardHeader>
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+        <section className="my-16 animate-fade-in">
+          <Card className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-950/40 dark:via-purple-950/40 dark:to-pink-900/40 border-blue-200/50 dark:border-blue-700/50 shadow-soft-lg hover:shadow-glow transition-all duration-500">
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-400/10 to-pink-400/10 rounded-full blur-3xl" />
+            <CardHeader className="relative z-10">
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
                 <div className="flex-shrink-0">
-                  <Image
-                    src="/images/nno-logo-white-bg.png"
-                    alt="National Night Out 2025"
-                    width={120}
-                    height={120}
-                    className="h-20 w-20 sm:h-24 sm:w-24 rounded-lg shadow-md"
-                  />
+                  <div className="p-3 rounded-2xl bg-white/50 dark:bg-white/10 backdrop-blur-sm shadow-soft hover:scale-105 transition-transform duration-300">
+                    <Image
+                      src="/images/nno-logo-white-bg.png"
+                      alt="National Night Out 2025"
+                      width={120}
+                      height={120}
+                      className="h-20 w-20 sm:h-24 sm:w-24 rounded-xl"
+                    />
+                  </div>
                 </div>
                 <div className="flex-1">
-                  <CardTitle className="text-2xl sm:text-3xl text-foreground mb-2">National Night Out 2025</CardTitle>
-                  <CardDescription className="text-lg text-muted-foreground">
+                  <CardTitle className="text-2xl sm:text-3xl lg:text-4xl text-foreground mb-3 font-bold">National Night Out 2025</CardTitle>
+                  <CardDescription className="text-lg sm:text-xl text-muted-foreground">
                     Join us for an evening of community fun and police-community partnerships
                   </CardDescription>
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-6 relative z-10">
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-blue-500" />
-                  <span className="text-sm font-medium">Tuesday, August 5th</span>
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-sm shadow-soft">
+                  <Calendar className="h-5 w-5 text-blue-500" />
+                  <span className="text-sm font-semibold">Tuesday, August 5th</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-green-500" />
-                  <span className="text-sm font-medium">5:00 PM - 8:00 PM</span>
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-sm shadow-soft">
+                  <Clock className="h-5 w-5 text-green-500" />
+                  <span className="text-sm font-semibold">5:00 PM - 8:00 PM</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-red-500" />
-                  <span className="text-sm font-medium">Dimmick Park</span>
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-white/50 dark:bg-white/5 backdrop-blur-sm shadow-soft">
+                  <MapPin className="h-5 w-5 text-red-500" />
+                  <span className="text-sm font-semibold">Dimmick Park</span>
                 </div>
               </div>
-              <p className="text-muted-foreground">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                 Meet Disney's Elsa, enjoy live music from The Main Street Sound, games, prizes, and so much more! This
                 annual event strengthens the bond between our police department and the community we serve.
               </p>
-              <Button asChild variant="outline">
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-2 border-primary hover:bg-primary hover:text-primary-foreground font-semibold shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:scale-105"
+              >
                 <Link href="/events/national-night-out">
-                  <Users className="mr-2 h-4 w-4" />
+                  <Users className="mr-2 h-5 w-5" />
                   Learn More & RSVP
                 </Link>
               </Button>
@@ -345,145 +377,173 @@ export default function HomePage() {
         </section>
 
         {/* Department Statistics */}
-        <section className="my-12">
-          <h2 className="text-3xl font-bold text-center mb-8 text-foreground flex items-center justify-center gap-3">
-            <BarChart3 className="h-8 w-8 text-primary" />
-            Department Statistics
-          </h2>
+        <section className="my-16 animate-fade-in">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center gap-3 mb-4 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20">
+              <BarChart3 className="h-7 w-7 text-primary animate-pulse-soft" />
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground">Department Statistics</h2>
+            </div>
+            <p className="text-lg text-muted-foreground">Tracking our commitment to excellence</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="bg-card shadow-sm hover:shadow-md transition-shadow">
+            <Card className="group bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-900/30 border-green-200/50 dark:border-green-700/50 shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Response Time</CardTitle>
-                <Activity className="h-4 w-4 text-green-500" />
+                <CardTitle className="text-sm font-semibold">Response Time</CardTitle>
+                <div className="p-2 rounded-xl bg-green-100 dark:bg-green-900/30 group-hover:scale-110 transition-transform duration-300">
+                  <Activity className="h-5 w-5 text-green-600 dark:text-green-400" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-green-600">4.2 min</div>
-                <p className="text-xs text-muted-foreground">Average emergency response</p>
-                <Progress value={85} className="mt-2" />
+                <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">4.2 min</div>
+                <p className="text-xs text-muted-foreground mb-3">Average emergency response</p>
+                <Progress value={85} className="mt-2 h-2" />
               </CardContent>
             </Card>
 
-            <Card className="bg-card shadow-sm hover:shadow-md transition-shadow">
+            <Card className="group bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-900/30 border-teal-200/50 dark:border-teal-700/50 shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Crime Rate</CardTitle>
-                <TrendingDown className="h-4 w-4 text-green-500" />
+                <CardTitle className="text-sm font-semibold">Crime Rate</CardTitle>
+                <div className="p-2 rounded-xl bg-teal-100 dark:bg-teal-900/30 group-hover:scale-110 transition-transform duration-300">
+                  <TrendingDown className="h-5 w-5 text-teal-600 dark:text-teal-400" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-green-600">-12%</div>
-                <p className="text-xs text-muted-foreground">Decrease from last year</p>
-                <Progress value={88} className="mt-2" />
+                <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-1">-12%</div>
+                <p className="text-xs text-muted-foreground mb-3">Decrease from last year</p>
+                <Progress value={88} className="mt-2 h-2" />
               </CardContent>
             </Card>
 
-            <Card className="bg-card shadow-sm hover:shadow-md transition-shadow">
+            <Card className="group bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-900/30 border-blue-200/50 dark:border-blue-700/50 shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Community Events</CardTitle>
-                <Users className="h-4 w-4 text-blue-500" />
+                <CardTitle className="text-sm font-semibold">Community Events</CardTitle>
+                <div className="p-2 rounded-xl bg-blue-100 dark:bg-blue-900/30 group-hover:scale-110 transition-transform duration-300">
+                  <Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-blue-600">24</div>
-                <p className="text-xs text-muted-foreground">Events hosted this year</p>
-                <Progress value={75} className="mt-2" />
+                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">24</div>
+                <p className="text-xs text-muted-foreground mb-3">Events hosted this year</p>
+                <Progress value={75} className="mt-2 h-2" />
               </CardContent>
             </Card>
 
-            <Card className="bg-card shadow-sm hover:shadow-md transition-shadow">
+            <Card className="group bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-900/30 border-purple-200/50 dark:border-purple-700/50 shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Officer Training</CardTitle>
-                <Award className="h-4 w-4 text-purple-500" />
+                <CardTitle className="text-sm font-semibold">Officer Training</CardTitle>
+                <div className="p-2 rounded-xl bg-purple-100 dark:bg-purple-900/30 group-hover:scale-110 transition-transform duration-300">
+                  <Award className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-purple-600">480</div>
-                <p className="text-xs text-muted-foreground">Hours completed this year</p>
-                <Progress value={92} className="mt-2" />
+                <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-1">480</div>
+                <p className="text-xs text-muted-foreground mb-3">Hours completed this year</p>
+                <Progress value={92} className="mt-2 h-2" />
               </CardContent>
             </Card>
           </div>
         </section>
 
         {/* Services Grid */}
-        <section className="my-12">
-          <h2 className="text-3xl font-bold text-center mb-8 text-foreground">Our Services</h2>
+        <section className="my-16 animate-fade-in">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Our Services</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Comprehensive law enforcement services tailored to our community's needs
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="bg-card shadow-sm hover:shadow-md transition-shadow">
+            <Card className="group bg-card shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 border-red-200/20 dark:border-red-700/20">
               <CardHeader>
-                <div className="flex items-center gap-3">
-                  <AlertTriangle className="h-8 w-8 text-red-500" />
-                  <CardTitle className="text-lg">Emergency Response</CardTitle>
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-red-100 to-red-200 dark:from-red-900/30 dark:to-red-800/30 group-hover:scale-110 transition-transform duration-300">
+                    <AlertTriangle className="h-8 w-8 text-red-600 dark:text-red-400" />
+                  </div>
+                  <CardTitle className="text-lg font-bold">Emergency Response</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   24/7 emergency response services for all types of incidents. Call 911 for immediate assistance.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card shadow-sm hover:shadow-md transition-shadow">
+            <Card className="group bg-card shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 border-blue-200/20 dark:border-blue-700/20">
               <CardHeader>
-                <div className="flex items-center gap-3">
-                  <Car className="h-8 w-8 text-blue-500" />
-                  <CardTitle className="text-lg">Traffic Safety</CardTitle>
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30 group-hover:scale-110 transition-transform duration-300">
+                    <Car className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <CardTitle className="text-lg font-bold">Traffic Safety</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Traffic enforcement, accident investigation, and road safety education programs.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card shadow-sm hover:shadow-md transition-shadow">
+            <Card className="group bg-card shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 border-green-200/20 dark:border-green-700/20">
               <CardHeader>
-                <div className="flex items-center gap-3">
-                  <Home className="h-8 w-8 text-green-500" />
-                  <CardTitle className="text-lg">Community Policing</CardTitle>
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/30 group-hover:scale-110 transition-transform duration-300">
+                    <Home className="h-8 w-8 text-green-600 dark:text-green-400" />
+                  </div>
+                  <CardTitle className="text-lg font-bold">Community Policing</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Building strong relationships with residents through community engagement and outreach programs.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card shadow-sm hover:shadow-md transition-shadow">
+            <Card className="group bg-card shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 border-purple-200/20 dark:border-purple-700/20">
               <CardHeader>
-                <div className="flex items-center gap-3">
-                  <Shield className="h-8 w-8 text-purple-500" />
-                  <CardTitle className="text-lg">Crime Prevention</CardTitle>
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/30 group-hover:scale-110 transition-transform duration-300">
+                    <Shield className="h-8 w-8 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <CardTitle className="text-lg font-bold">Crime Prevention</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Proactive crime prevention strategies and safety education for residents and businesses.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card shadow-sm hover:shadow-md transition-shadow">
+            <Card className="group bg-card shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 border-pink-200/20 dark:border-pink-700/20">
               <CardHeader>
-                <div className="flex items-center gap-3">
-                  <Heart className="h-8 w-8 text-pink-500" />
-                  <CardTitle className="text-lg">Victim Services</CardTitle>
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-pink-100 to-pink-200 dark:from-pink-900/30 dark:to-pink-800/30 group-hover:scale-110 transition-transform duration-300">
+                    <Heart className="h-8 w-8 text-pink-600 dark:text-pink-400" />
+                  </div>
+                  <CardTitle className="text-lg font-bold">Victim Services</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Support and resources for crime victims and their families during difficult times.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card shadow-sm hover:shadow-md transition-shadow">
+            <Card className="group bg-card shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 border-orange-200/20 dark:border-orange-700/20">
               <CardHeader>
-                <div className="flex items-center gap-3">
-                  <Users className="h-8 w-8 text-orange-500" />
-                  <CardTitle className="text-lg">Youth Programs</CardTitle>
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/30 group-hover:scale-110 transition-transform duration-300">
+                    <Users className="h-8 w-8 text-orange-600 dark:text-orange-400" />
+                  </div>
+                  <CardTitle className="text-lg font-bold">Youth Programs</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Educational programs and positive interactions with young people in our community.
                 </p>
               </CardContent>
@@ -492,58 +552,65 @@ export default function HomePage() {
         </section>
 
         {/* Contact Section */}
-        <section className="my-12">
-          <Card className="bg-card shadow-lg">
-            <CardHeader className="text-center">
-              <CardTitle className="text-3xl font-bold text-foreground mb-2">Contact Us</CardTitle>
-              <CardDescription className="text-lg text-muted-foreground">
+        <section className="my-16 animate-fade-in">
+          <Card className="relative overflow-hidden bg-card shadow-soft-lg border-2 border-blue-200/30 dark:border-blue-700/30">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-400/10 to-indigo-400/10 rounded-full blur-3xl" />
+            <CardHeader className="text-center relative z-10">
+              <CardTitle className="text-3xl sm:text-4xl font-bold text-foreground mb-3">Contact Us</CardTitle>
+              <CardDescription className="text-lg sm:text-xl text-muted-foreground">
                 We're here to serve and protect our community
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-8 relative z-10">
               <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-foreground">Get In Touch</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <Phone className="h-5 w-5 text-blue-500" />
+                <div className="space-y-6">
+                  <h3 className="text-2xl font-bold text-foreground">Get In Touch</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-red-50 to-red-100 dark:from-red-950/30 dark:to-red-900/30 shadow-soft">
+                      <div className="p-2 rounded-xl bg-red-100 dark:bg-red-900/50">
+                        <Phone className="h-6 w-6 text-red-600 dark:text-red-400" />
+                      </div>
                       <div>
-                        <p className="font-medium">Emergency</p>
-                        <a href="tel:911" className="text-red-600 hover:underline font-bold">
+                        <p className="font-semibold text-foreground">Emergency</p>
+                        <a href="tel:911" className="text-2xl font-bold text-red-600 hover:text-red-700 transition-colors">
                           911
                         </a>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Phone className="h-5 w-5 text-blue-500" />
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/30 shadow-soft">
+                      <div className="p-2 rounded-xl bg-blue-100 dark:bg-blue-900/50">
+                        <Phone className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                      </div>
                       <div>
-                        <p className="font-medium">Non-Emergency</p>
-                        <a href="tel:+16103302200" className="text-blue-600 hover:underline">
+                        <p className="font-semibold text-foreground">Non-Emergency</p>
+                        <a href="tel:+16103302200" className="text-lg font-bold text-blue-600 hover:text-blue-700 transition-colors">
                           (610) 330-2200
                         </a>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <MapPin className="h-5 w-5 text-blue-500 mt-1" />
+                    <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-950/30 dark:to-indigo-900/30 shadow-soft">
+                      <div className="p-2 rounded-xl bg-indigo-100 dark:bg-indigo-900/50">
+                        <MapPin className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+                      </div>
                       <div>
-                        <p className="font-medium">Address</p>
+                        <p className="font-semibold text-foreground">Address</p>
                         <a
                           href="https://maps.google.com/maps?q=685+Main+St,+Hellertown,+PA+18055-1745"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-600 hover:underline"
+                          className="text-indigo-600 hover:text-indigo-700 transition-colors"
                         >
-                          685 Main Street
-                          <br />
-                          Hellertown, PA 18055
+                          685 Main Street<br />Hellertown, PA 18055
                         </a>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <Mail className="h-5 w-5 text-blue-500 mt-1" />
+                    <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-900/30 shadow-soft">
+                      <div className="p-2 rounded-xl bg-purple-100 dark:bg-purple-900/50">
+                        <Mail className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                      </div>
                       <div>
-                        <p className="font-medium">Email</p>
-                        <a href="mailto:jbaitinger@hellertownpd.org" className="text-blue-600 hover:underline">
+                        <p className="font-semibold text-foreground">Email</p>
+                        <a href="mailto:jbaitinger@hellertownpd.org" className="text-purple-600 hover:text-purple-700 transition-colors break-all">
                           jbaitinger@hellertownpd.org
                         </a>
                       </div>
@@ -551,37 +618,40 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-foreground">Follow Us</h3>
-                  <p className="text-muted-foreground text-sm">
+                <div className="space-y-6">
+                  <h3 className="text-2xl font-bold text-foreground">Follow Us</h3>
+                  <p className="text-muted-foreground leading-relaxed">
                     Stay connected with the latest news and updates from the Hellertown Police Department
                   </p>
                   <div className="flex gap-4">
-                    <Button variant="outline" size="icon" asChild>
+                    <Button variant="outline" size="icon" className="h-14 w-14 rounded-xl hover:scale-110 transition-all duration-300 shadow-soft hover:shadow-soft-lg" asChild>
                       <a href="https://www.facebook.com/hellertownpd" target="_blank" rel="noopener noreferrer">
-                        <Facebook className="h-5 w-5" />
+                        <Facebook className="h-6 w-6" />
                         <span className="sr-only">Facebook</span>
                       </a>
                     </Button>
-                    <Button variant="outline" size="icon" asChild>
+                    <Button variant="outline" size="icon" className="h-14 w-14 rounded-xl hover:scale-110 transition-all duration-300 shadow-soft hover:shadow-soft-lg" asChild>
                       <a href="https://twitter.com/hellertownpd" target="_blank" rel="noopener noreferrer">
-                        <Twitter className="h-5 w-5" />
+                        <Twitter className="h-6 w-6" />
                         <span className="sr-only">Twitter</span>
                       </a>
                     </Button>
-                    <Button variant="outline" size="icon" asChild>
+                    <Button variant="outline" size="icon" className="h-14 w-14 rounded-xl hover:scale-110 transition-all duration-300 shadow-soft hover:shadow-soft-lg" asChild>
                       <a href="https://instagram.com/hellertownpd" target="_blank" rel="noopener noreferrer">
-                        <Instagram className="h-5 w-5" />
+                        <Instagram className="h-6 w-6" />
                         <span className="sr-only">Instagram</span>
                       </a>
                     </Button>
                   </div>
 
-                  <div className="pt-4">
-                    <h4 className="font-medium text-foreground mb-2">Office Hours</h4>
-                    <div className="text-sm text-muted-foreground space-y-1">
-                      <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
-                      <p>Emergency Services: 24/7</p>
+                  <div className="pt-6 p-6 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-900/30 shadow-soft">
+                    <h4 className="font-bold text-foreground mb-3 text-lg flex items-center gap-2">
+                      <Clock className="h-5 w-5 text-green-600 dark:text-green-400" />
+                      Office Hours
+                    </h4>
+                    <div className="text-sm text-muted-foreground space-y-2">
+                      <p className="font-medium">Monday - Friday: 8:00 AM - 4:00 PM</p>
+                      <p className="font-semibold text-green-600 dark:text-green-400">Emergency Services: 24/7</p>
                     </div>
                   </div>
                 </div>
@@ -592,52 +662,59 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-card mt-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
+      <footer className="relative border-t border-border/50 bg-gradient-to-b from-card to-secondary mt-16 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-br from-blue-500/5 to-purple-500/5 blur-3xl" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+          <div className="grid md:grid-cols-3 gap-10">
+            <div className="space-y-4">
               <div className="flex items-center gap-3 mb-4">
-                <Image
-                  src="/images/hellertown-badge.svg"
-                  alt="Hellertown Police Department Badge"
-                  width={48}
-                  height={48}
-                  className="h-12 w-12"
-                />
+                <div className="p-2 rounded-2xl bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-950/30 dark:to-indigo-900/30 shadow-soft">
+                  <Image
+                    src="/images/hellertown-badge.svg"
+                    alt="Hellertown Police Department Badge"
+                    width={48}
+                    height={48}
+                    className="h-12 w-12"
+                  />
+                </div>
                 <div>
-                  <h3 className="font-bold text-foreground">Hellertown Police Department</h3>
-                  <p className="text-sm text-muted-foreground">Serving since 1872</p>
+                  <h3 className="font-bold text-foreground text-lg">Hellertown Police Department</h3>
+                  <p className="text-sm text-muted-foreground font-medium">Serving since 1872</p>
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 Committed to protecting and serving the Hellertown community with integrity, professionalism, and
                 dedication.
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm">
+              <h4 className="font-bold text-foreground mb-5 text-lg">Quick Links</h4>
+              <ul className="space-y-3">
                 <li>
-                  <Link href="/jobs" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link href="/jobs" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-flex items-center gap-2 group">
+                    <span className="w-0 h-0.5 bg-primary group-hover:w-3 transition-all duration-300" />
                     Career Opportunities
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/events/national-night-out"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-flex items-center gap-2 group"
                   >
+                    <span className="w-0 h-0.5 bg-primary group-hover:w-3 transition-all duration-300" />
                     National Night Out
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link href="/contact" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-flex items-center gap-2 group">
+                    <span className="w-0 h-0.5 bg-primary group-hover:w-3 transition-all duration-300" />
                     Contact Us
                   </Link>
                 </li>
                 <li>
-                  <a href="tel:911" className="text-muted-foreground hover:text-primary transition-colors">
+                  <a href="tel:911" className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-semibold transition-all duration-300 hover:translate-x-1 inline-flex items-center gap-2 group">
+                    <span className="w-0 h-0.5 bg-red-600 group-hover:w-3 transition-all duration-300" />
                     Emergency: 911
                   </a>
                 </li>
@@ -645,31 +722,32 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Contact Info</h4>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <p className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  (610) 330-2200
-                </p>
-                <p className="flex items-start gap-2">
-                  <MapPin className="h-4 w-4 mt-0.5" />
-                  685 Main Street
-                  <br />
-                  Hellertown, PA 18055
-                </p>
-                <p className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  jbaitinger@hellertownpd.org
-                </p>
+              <h4 className="font-bold text-foreground mb-5 text-lg">Contact Info</h4>
+              <div className="space-y-3 text-sm text-muted-foreground">
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-card/50 backdrop-blur-sm shadow-soft">
+                  <Phone className="h-4 w-4 text-blue-500" />
+                  <span>(610) 330-2200</span>
+                </div>
+                <div className="flex items-start gap-3 p-3 rounded-xl bg-card/50 backdrop-blur-sm shadow-soft">
+                  <MapPin className="h-4 w-4 mt-0.5 text-blue-500" />
+                  <span>
+                    685 Main Street<br />
+                    Hellertown, PA 18055
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-card/50 backdrop-blur-sm shadow-soft">
+                  <Mail className="h-4 w-4 text-blue-500" />
+                  <span className="break-all">jbaitinger@hellertownpd.org</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <Separator className="my-6" />
+          <Separator className="my-8 bg-border/50" />
 
-          <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Hellertown Borough Police Department. All Rights Reserved.</p>
-            <p className="mt-2 sm:mt-0">An Equal Opportunity Employer</p>
+          <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground gap-4">
+            <p className="font-medium">&copy; {new Date().getFullYear()} Hellertown Borough Police Department. All Rights Reserved.</p>
+            <p className="font-medium">An Equal Opportunity Employer</p>
           </div>
         </div>
       </footer>

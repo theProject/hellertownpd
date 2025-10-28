@@ -4,69 +4,70 @@
 
 @layer base {
   :root {
-    --background: 220 13% 91%; /* Light mode background - Lighter Gray */
-    --foreground: 224 71% 4%; /* Light mode text - Dark Blue/Black */
+    --background: 220 20% 95%; /* Enhanced light background with more character */
+    --foreground: 222 84% 4.9%; /* Rich dark text */
 
-    --card: 220 13% 96%; /* Light mode card background - Very Light Gray */
-    --card-foreground: 224 71% 4%; /* Light mode card text */
+    --card: 0 0% 100%; /* Pure white cards for contrast */
+    --card-foreground: 222 84% 4.9%;
 
-    --popover: 220 13% 96%;
-    --popover-foreground: 224 71% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 84% 4.9%;
 
-    --primary: 217 91% 60%; /* Light mode primary - Blue */
-    --primary-foreground: 210 20% 98%; /* Light mode primary text - White */
+    --primary: 221 83% 53%; /* Vibrant professional blue */
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 220 14% 96%; /* Light mode secondary - Light Gray */
-    --secondary-foreground: 224 71% 4%; /* Light mode secondary text */
+    --secondary: 220 17% 93%; /* Sophisticated secondary */
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 220 9% 46%; /* Light mode muted text - Medium Gray */
-    --muted-foreground: 220 9% 46%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8.9% 46.1%;
 
-    --accent: 217 91% 60%; /* Light mode accent - Blue */
-    --accent-foreground: 210 20% 98%; /* Light mode accent text */
+    --accent: 221 83% 53%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 72% 51%; /* Light mode destructive - Red */
-    --destructive-foreground: 210 20% 98%;
+    --destructive: 0 84% 60%; /* Vivid red for important actions */
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 220 13% 86%; /* Light mode border - Gray */
-    --input: 220 13% 86%;
-    --ring: 217 91% 60%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 221 83% 53%;
+    --radius: 0.75rem; /* Larger, more modern radius */
 
-    --badge: 47 95% 44%; /* Yellow for badge */
-    --badge-foreground: 224 71% 4%; /* Dark text for badge */
+    --badge: 45 93% 47%;
+    --badge-foreground: 0 0% 100%;
   }
 
   .dark {
-    --background: 224 71% 4%; /* Dark mode background - Very Dark Blue/Black */
-    --foreground: 210 20% 98%; /* Dark mode text - Light Gray/White */
+    --background: 222 47% 3%; /* Deep, rich dark background */
+    --foreground: 210 40% 98%;
 
-    --card: 224 71% 9%; /* Dark mode card background - Darker Blue/Black */
-    --card-foreground: 210 20% 98%; /* Dark mode card text */
+    --card: 222 47% 7%; /* Elevated card surface */
+    --card-foreground: 210 40% 98%;
 
-    --popover: 224 71% 4%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 222 47% 7%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 210 20% 98%; /* Dark mode primary - Light Gray/White */
-    --primary-foreground: 224 71% 4%; /* Dark mode primary text - Dark Blue/Black */
+    --primary: 217 91% 60%; /* Bright blue that pops */
+    --primary-foreground: 222 47% 11%;
 
-    --secondary: 215 28% 17%; /* Dark mode secondary - Dark Gray */
-    --secondary-foreground: 210 20% 98%; /* Dark mode secondary text */
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 215 20% 30%; /* Dark mode muted text - Medium Dark Gray */
+    --muted: 217 32% 17%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 210 20% 98%; /* Dark mode accent - Light Gray/White */
-    --accent-foreground: 224 71% 4%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 63% 31%; /* Dark mode destructive - Dark Red */
-    --destructive-foreground: 210 20% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 215 28% 17%; /* Dark mode border - Dark Gray */
-    --input: 215 28% 17%;
-    --ring: 210 20% 98%;
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 217 91% 60%;
 
-    --badge: 47 95% 44%; /* Yellow for badge */
-    --badge-foreground: 224 71% 4%; /* Dark text for badge */
+    --badge: 45 93% 47%;
+    --badge-foreground: 222 47% 11%;
   }
 }
 
@@ -74,9 +75,174 @@
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     @apply bg-background text-foreground;
-    font-family:
-      ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  }
+}
+
+@layer components {
+  /* Glass morphism effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .glass-dark {
+    background: rgba(17, 24, 39, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(75, 85, 99, 0.3);
+  }
+
+  /* Premium card elevation */
+  .card-elevated {
+    box-shadow:
+      0 1px 3px 0 rgba(0, 0, 0, 0.1),
+      0 1px 2px 0 rgba(0, 0, 0, 0.06),
+      0 10px 15px -3px rgba(0, 0, 0, 0.05),
+      0 4px 6px -2px rgba(0, 0, 0, 0.025);
+  }
+
+  .card-elevated-dark {
+    box-shadow:
+      0 1px 3px 0 rgba(0, 0, 0, 0.3),
+      0 1px 2px 0 rgba(0, 0, 0, 0.2),
+      0 10px 15px -3px rgba(0, 0, 0, 0.2),
+      0 4px 6px -2px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600;
+  }
+
+  /* Animated gradient background */
+  .animated-gradient {
+    background: linear-gradient(
+      -45deg,
+      hsl(var(--primary)),
+      hsl(217 91% 70%),
+      hsl(200 80% 60%),
+      hsl(217 91% 60%)
+    );
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Fade in animation */
+  .fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Slide in from left */
+  .slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Slide in from right */
+  .slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Scale in animation */
+  .scale-in {
+    animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Hover lift effect */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Shimmer effect */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    100% {
+      left: 100%;
+    }
   }
 }
