@@ -3,7 +3,7 @@ import { Suspense } from "react"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Inter } from "next/font/google"
-import { SiteHeader } from "@/components/site-header"
+//import { SiteHeader } from "@/components/site-header"
 import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -146,8 +146,8 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <Suspense fallback={null}>
-            <SiteHeader />
-            <Analytics />
+
+            <hAnalytics />
             {children}
           </Suspense>
         </ThemeProvider>
